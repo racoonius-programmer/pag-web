@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Config default-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <!-- Latest compiled and minified CSS -->
+    <!-- Cargar librerias Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Latest compiled JavaScript -->
     <script src="js/bootstrap.bundle.min.js"></script>
 
-     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="estilos/fonts.css">
+
+</head>
+
+<body>
+     <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
+      
   <div class="container-fluid">
-              <img src="img/logo_sin_fondo.png" alt="Logo" style="width:50px;"> 
+              <a href="main.html">
+                  <img src="img/logo_sin_fondo.png" alt="Logo" style="width:60px;">
+              </a>
     <a class="navbar-brand " href="javascript:void(0)">Level-up Gamer</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -27,9 +36,10 @@
           <a class="nav-link" href="javascript:void(0)">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)">Link</a>
+          <a class="nav-link" href="productos.html"> Productos</a>
         </li>
       </ul>
+       <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a> <ul class="dropdown-menu"> <li><a class="dropdown-item" href="#">Action</a></li> <li><a class="dropdown-item" href="#">Another action</a></li> <li><a class="dropdown-item" href="#">Something else here</a></li> </ul> 
       <form class="d-flex">
         <input class="form-control me-2" type="text" placeholder="Introduce tu búsqueda">
         <button class="btn btn-primary" type="button">Buscar</button>
@@ -45,8 +55,41 @@
     </div>
   </div>
 </nav> 
-</head>
-<body>
 
+<!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/gamer_stock.png" alt="Los Angeles" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="img/gamer_stock.png" alt="Chicago" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="img/gamer_stock.png" alt="New York" class="d-block w-100">
+    </div>
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+<!-- Footer de ejemplo que quiza usemos de final lol-->
+  <footer class="py-3 my-4"> <ul class="nav justify-content-center border-bottom pb-3 mb-3"> <li class="nav-item"><a href="main.html" class="nav-link px-2 text-body-secondary">Inicio</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sample</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sample</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sample</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sample</a></li> </ul> <p class="text-center text-body-secondary">© 2025 Level-Up Gamer</p> </footer> 
 </body>
 </html>

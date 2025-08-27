@@ -1,0 +1,9 @@
+/* Roboto será la fuente principal */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Orbitron para partes destacadas */
+.navbar * {
+  font-family: 'Orbitron', sans-serif !important;
+}
