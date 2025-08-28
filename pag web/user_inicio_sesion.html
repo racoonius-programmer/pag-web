@@ -55,48 +55,26 @@
             </div>
         </div>
     </nav>
-    <body>
-    <div class="p-5 shadow rounded container" style="text-align: center;">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8"></div>
-            <div class="col-2"></div>
+    <div class="container">
+    <form action="/action_page.php">
+        <div class="mb-3 mt-3">
+            <label for="email" class="form-label text-light">Correo:</label>
+            <input type="email" class="form-control" id="email" placeholder="Introduzca un correo" name="email">
         </div>
-        <div>
-            <h3 class="text-light"> REGISTRAR USUARIO</h3>
-
-            <div>
-                <form action="inicio.html" method="get" enctype="multipart/form-data">
-                    <div class="mb-3">
-
-                        <div>
-                            <label for="f_usr" class="form-label text-light">Nombre de usuario:</label><br>
-                            <input type="text" required id="fname" class="form-control" name="f_usr" value=""><br>
-                        </div>
-
-                        <div>
-                            <label for="lname" class="form-label text-light">Contraseña:</label><br>
-                            <input type="password" required id="lname" class="form-control" name="lname"
-                                value=""><br><br>
-                        </div>
-
-                        <div>
-                            <label for="f_usr" class="form-label text-light">email:</label><br>
-                            <input type="email" id="fname" required class="form-control" name="f_usr" value=""><br>
-                        </div>
-
-                        <div>
-                            <button style="background-color: #1E90FF;" type="submit" class="btn btn-primary">Registrar usuario</button>
-
-                        </div>
-
-                </form>
-
-            </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label text-light">Constraseña:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Introduzca una contraseña" name="pswd">
         </div>
+        <div class="form-check mb-3 text-light">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember"> Recordar contraseña
+            </label>
+        </div>
+        <button style="background-color: #1E90FF;" tton type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
     </div>
-    </div>
+
 
     <!-- Footer de ejemplo que quiza usemos de final lol-->
     <footer class="py-3 my-4 bg-black orbitron ">
