@@ -1,14 +1,16 @@
-/* Roboto será la fuente principal */
+/* Roboto para el body */
 body {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Orbitron para partes destacadas */
+/* Orbitron para la navbar */
 .navbar * {
   font-family: 'Orbitron', sans-serif !important;
 }
 
+/* Orbitron para el footer */
 .orbitron {
   font-family: 'Orbitron', sans-serif;
   font-weight: bold;
 }
+

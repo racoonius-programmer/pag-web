@@ -13,48 +13,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="estilos/fonts.css">
+    <link rel="stylesheet" href="styles/fonts.css">
 
 </head>
 
 <body class="m-0" style="background-color: black;">
-    <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
+  <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
 
-        <div class="container-fluid">
-            <a href="main.html">
-                <img src="img/logo_sin_fondo.png" alt="Logo" style="width:60px;">
-            </a>
-            <a class="navbar-brand " href="javascript:void(0)">Level-up Gamer</a>
+    <div class="container-fluid">
+      <a href="main.html">
+        <img src="img/header/logo_sin_fondo.png" alt="Logo" style="width:60px;">
+      </a>
+      <a class="navbar-brand " href="main.html">Level-up Gamer</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.html"> Productos</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="Introduce tu búsqueda">
-                    <button class="btn btn-primary" type="button">Buscar</button>
-                </form>
-                <a class="navbar-nav nav-link dropdown-toggle ms-3" href="#" data-bs-toggle="dropdown"
-                    aria-expanded="false"><img src="img/user-logo-gamer-no-bg.png" alt="" style="width: 60px;"></a>
-
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="user_registro.html">Registro</a></li>
-                    <li><a class="dropdown-item" href="iniciarSesion.html">Iniciar Sesión</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="productos.html"> Productos</a>
+          </li>
+        </ul>
+        <form class="d-flex" action="main.html" method="get">
+          <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
+          <button class="btn btn-primary" type="submit">Buscar</button>
+        </form>
+        <a class="navbar-nav nav-link dropdown-toggle ms-3 align-items-end" href="#" data-bs-toggle="dropdown" aria-expanded="false"><img src="img/header/user-logo-generic-white-alt.png" alt="Usuario" style="width: 60px;"></a>
+        
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="user_registro.html">Registro</a></li>
+          <li><a class="dropdown-item" href="user_inicio_sesion.html">Iniciar Sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <body>
     <div class="p-5 shadow rounded container" style="text-align: center;">
         <div class="row">

@@ -1,0 +1,13 @@
+.card {
+  height: 100%;
+}
+
+.card .card-img-top {
+  height: 300px; 
+  object-fit: cover;
+}
+
+.row.align-items-stretch {
+  display: flex;
+  flex-wrap: wrap;
+}
