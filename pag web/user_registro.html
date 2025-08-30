@@ -5,7 +5,7 @@
     <!-- Config default-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Registro</title>
     <!-- Cargar librerias Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -17,14 +17,14 @@
 
 </head>
 
-<body class="m-0" style="background-color: black;">
+<body class="m-0" style="background-color: #242729;">
   <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
 
     <div class="container-fluid">
       <a href="main.html">
         <img src="img/header/logo_sin_fondo.png" alt="Logo" style="width:60px;">
       </a>
-      <a class="navbar-brand " href="main.html">Level-up Gamer</a>
+      <a class="navbar-brand ms-2" href="main.html">Level-up Gamer</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
@@ -54,41 +54,52 @@
       </div>
     </div>
   </nav>
-    <body>
-    <div class="p-5 shadow rounded container" style="text-align: center;">
+<body>
+    <div class="p-5 rounded container">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8"></div>
             <div class="col-2"></div>
         </div>
+
         <div>
-            <h3 class="text-light"> REGISTRAR USUARIO</h3>
+            <h3 class="text-light" style="text-align: center; font-weight: bold;">Registro</h3>
 
             <div>
-                <form action="inicio.html" method="get" enctype="multipart/form-data">
+                <form action="main.html" method="get" enctype="multipart/form-data">
                     <div class="mb-3">
 
                         <div>
                             <label for="f_usr" class="form-label text-light">Nombre de usuario:</label><br>
-                            <input type="text" required id="fname" class="form-control" name="f_usr" value=""><br>
+                            <input type="text" required id="username" class="form-control" name="username" value="" placeholder=><p style="color: white; font-style: italic;">(El nombre de usuario debe contener al menos 3 carácteres.)</p>
+                        </div>
+
+                        <div>
+                            <label for="f_usr" class="form-label text-light">Correo:</label><br>
+                            <input type="email" id="correo" required class="form-control" name="correo" value=""><br>
                         </div>
 
                         <div>
                             <label for="lname" class="form-label text-light">Contraseña:</label><br>
-                            <input type="password" required id="lname" class="form-control" name="lname"
-                                value=""><br><br>
+                            <input type="password" required id="contrasena" class="form-control" name="contrasena"
+                                value=""><br>
                         </div>
 
                         <div>
-                            <label for="f_usr" class="form-label text-light">email:</label><br>
-                            <input type="email" id="fname" required class="form-control" name="f_usr" value=""><br>
+                            <label for="lname" class="form-label text-light">Confirmar contraseña:</label><br>
+                            <input type="password" required id="confirmar_contrasena" class="form-control" name="confirmar_contrasena"
+                                value=""><br>
                         </div>
 
                         <div>
-                            <button style="background-color: #1E90FF;" type="submit" class="btn btn-primary">Registrar usuario</button>
-
-                        </div>
-
+                            <button type="submit" class="btn btn-azul-electrico">Registrarme</button>
+                        </div><br>
+<div>
+    <p class="text-light">
+        ¿Ya tienes una cuenta? 
+        <a href="user_inicio_sesion.html" class="text-light text-decoration-underline">Iniciar sesión</a>.
+    </p>
+</div>
                 </form>
 
             </div>
@@ -98,7 +109,7 @@
     </div>
 
     <!-- Footer de ejemplo que quiza usemos de final lol-->
-    <footer class="py-3 my-4 bg-black orbitron ">
+    <footer class="py-3 my-4 bg-black orbitron" style="margin-bottom: 0%; flex: 1; ">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>

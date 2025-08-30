@@ -2,29 +2,29 @@
 <html lang="es">
 
 <head>
-    <!-- Config default-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <!-- Cargar librerias Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Config default-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión</title>
+  <!-- Cargar librerias Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
 
-    <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/fonts.css">
 
 </head>
 
-<body class="m-0" style="background-color: black;">
-  <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
+<body class="m-0" style="background-color: #242729;">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-black">
 
     <div class="container-fluid">
       <a href="main.html">
         <img src="img/header/logo_sin_fondo.png" alt="Logo" style="width:60px;">
       </a>
-      <a class="navbar-brand " href="main.html">Level-up Gamer</a>
+      <a class="navbar-brand ms-2" href="main.html">Level-up Gamer</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
@@ -45,8 +45,10 @@
           <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
           <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
-        <a class="navbar-nav nav-link dropdown-toggle ms-3 align-items-end" href="#" data-bs-toggle="dropdown" aria-expanded="false"><img src="img/header/user-logo-generic-white-alt.png" alt="Usuario" style="width: 60px;"></a>
-        
+        <a class="navbar-nav nav-link dropdown-toggle ms-3 align-items-end" href="#" data-bs-toggle="dropdown"
+          aria-expanded="false"><img src="img/header/user-logo-generic-white-alt.png" alt="Usuario"
+            style="width: 60px;"></a>
+
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="user_registro.html">Registro</a></li>
           <li><a class="dropdown-item" href="user_inicio_sesion.html">Iniciar Sesión</a></li>
@@ -54,38 +56,48 @@
       </div>
     </div>
   </nav>
-    <div class="container">
-    <form action="/action_page.php">
-        <div class="mb-3 mt-3">
-            <label for="email" class="form-label text-light">Correo:</label>
-            <input type="email" class="form-control" id="email" placeholder="Introduzca un correo" name="email">
-        </div>
-        <div class="mb-3">
-            <label for="pwd" class="form-label text-light">Constraseña:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Introduzca una contraseña" name="pswd">
-        </div>
-        <div class="form-check mb-3 text-light">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="remember"> Recordar contraseña
-            </label>
-        </div>
-        <button style="background-color: #1E90FF;" tton type="submit" class="btn btn-primary">Submit</button>
+<div class="p-5 rounded container">
+    <!-- re envia al main por ahora, hasta implementar backend-->
+                 <h3 class="text-light" style="text-align: center; font-weight: bold;">Inicio de Sesión</h3>
+    <form action="main.html" method="get">
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label text-light">Correo:</label>
+        <input type="email" class="form-control" id="email" placeholder="Introduzca un correo" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label text-light">Constraseña:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Introduzca una contraseña" name="pswd">
+      </div>
+      <div class="form-check mb-3 text-light">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="remember"> Recordar contraseña
+        </label>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-azul-electrico">Iniciar sesión</button>
+      </div><br>
+      <div>
+        <p class="text-light">
+          ¿No tienes una cuenta?
+          <a href="user_registro.html" class="text-light text-decoration-underline">Regístrate</a>.
+        </p>
+      </div>
     </form>
 
-    </div>
+  </div>
 
 
-    <!-- Footer de ejemplo que quiza usemos de final lol-->
-    <footer class="py-3 my-4 bg-black orbitron ">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
-        </ul>
-        <p class="text-center text-light">© 2025 Level-Up Gamer</p>
-    </footer>
+  <!-- Footer de ejemplo que quiza usemos de final lol-->
+  <footer class="py-3 my-4 bg-black orbitron" style="margin-bottom: 0%; flex: 1; ">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
+    </ul>
+    <p class="text-center text-light">© 2025 Level-Up Gamer</p>
+  </footer>
 </body>
 
 </html>
