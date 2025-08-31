@@ -13,26 +13,28 @@ body .roboto {
   font-family: 'Orbitron', sans-serif;
   font-weight: bold;
 }
+
 /*Para cargar los colores de fondo que meti en bootstrap.css*/
 .bg-azul-electrico {
-  background-color: var(--bs-azul-electrico) !important;
+  background-color: #1E90FF !important;
 }
 
 .text-azul-electrico {
-  color: var(--bs-azul-electrico) !important;
+  color: #1E90FF !important;
 }
 
 .bg-verde-neon {
-  background-color: var(--bs-verde-neon) !important;
+  background-color: #39FF14 !important;
 }
 
 .text-verde-neon {
-  color: var(--bs-verde-neon) !important;
+  color: #39FF14 !important;
 }
+
 /*Para botones*/
 .btn-azul-electrico {
-  background-color: var(--bs-azul-electrico) !important;
-  border-color: var(--bs-azul-electrico) !important;
+  background-color: #1E90FF !important;
+  border-color: #1E90FF !important;
   color: #fff !important;
 }
 
@@ -41,8 +43,8 @@ body .roboto {
   border-color: #1E90FF !important;
 }
 .btn-verde-neon {
-  background-color: var(--bs-verde-neon) !important;
-  border-color: var(--bs-verde-neon) !important;
+  background-color: #39FF14 !important;
+  border-color: #39FF14 !important;
   color: #fff !important;
 }
 

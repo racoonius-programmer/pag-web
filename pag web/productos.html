@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/productos.css">
 </head>
 
-<body style="background-color: black;">
+<body class="m-0" style="background-color: black;">
   <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
 
     <div class="container-fluid">
@@ -37,13 +37,26 @@
           <li class="nav-item">
             <a class="nav-link" href="productos.html"> Productos</a>
           </li>
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Productos
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="htmlFIGURAS/figurasPRODUCTO.html">Figuras</a></li>
+                    <li><a class="dropdown-item" href="#">Figuras de acción</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Lo más vendido</a></li>
+                </ul>
+          </li>
         </ul>
         <form class="d-flex" action="main.html" method="get">
           <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
           <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
-        <a class="navbar-nav nav-link dropdown-toggle ms-3 align-items-end" href="#" data-bs-toggle="dropdown" aria-expanded="false"><img src="img/header/user-logo-generic-white-alt.png" alt="Usuario" style="width: 60px;"></a>
-        
+        <a class="navbar-nav nav-link dropdown-toggle ms-3 align-items-end" href="#" data-bs-toggle="dropdown"
+          aria-expanded="false"><img src="img/header/user-logo-generic-white-alt.png" alt="Usuario"
+            style="width: 60px;"></a>
+
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="user_registro.html">Registro</a></li>
           <li><a class="dropdown-item" href="user_inicio_sesion.html">Iniciar Sesión</a></li>
@@ -51,13 +64,30 @@
       </div>
     </div>
   </nav>
+<div  data-bs-theme="dark">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img class="card-img-top padding_top rounded" src="img/productos/lotrReal.png" alt="Card image">
+                            <div class="card-body">
+                                <h4 class="card-title">FIGURAS</h4>
+                                <p class="card-text"></p>
+                                <div class="padding_top">
+                                    <a style="background-color: #1E90FF;" href="htmlFIGURAS/figurasPRODUCTO.html" class="btn btn-primary">EXPLORAR CATALOGO</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>         
+        </div>
+    </div>
 
-<div data-bs-theme="dark">
+ 
 <div class="container py-5">
         <div class="row justify-content-center">
-                    <div class="col-md-4 mb-4">
-                        <div class="card align-items-center">
-                            <img class="card-img-top padding_top rounded" src="img/productos/juego_de_mesa.webp" alt="Juego de Mesa">
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img class="card-img-top padding_top rounded" src="img/productos/juego_de_mesa.webp" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">JUEGOS DE MESA</h4>
                                 <p class="card-text"></p>
@@ -68,26 +98,25 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/audifonos_gamer.jpg" alt="Audifonos Gamer">
+                            <img class="card-img-top padding_top rounded" src="img/productos/audifonos_gamer.jpg" alt="Card image">
                             <div class="card-body">
-                                <h4 class="card-title">Audifono Hypex blabla</h4>
-                                <p class="card-text">Recibe mañana</p>
-                                <div class="padding_top text-end">
-                                    <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">$100.000</a>
+                                <h4 class="card-title">ACCESORIOS</h4>
+                                <p class="card-text"></p>
+                                <div class="padding_top">
+                                    <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/consolas.jpeg" alt="Consolas">
+                            <img class="card-img-top padding_top rounded" src="img/productos/consolas.jpeg" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">CONSOLAS</h4>
                                 <p class="card-text"></p>
-                                
                                 <div class="padding_top">
                                     <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
                                 </div>
@@ -100,11 +129,11 @@
 <div class="a"> 
     <div class="container py-5">
         <div class="row justify-content-center">
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/armado-pc-gamers-sp-digital.jpg" alt="Computadores Gamer">
+                            <img class="card-img-top padding_top rounded" src="img/productos/armado-pc-gamers-sp-digital.jpg" alt="Card image">
                             <div class="card-body">
-                                <h4 class="card-title">COMPUTADORES GAMERS</h4>
+                                <h4 class="card-title">PC GAMERS</h4>
                                 <p class="card-text"></p>
                                 <div class="padding_top">
                                     <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
@@ -113,9 +142,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/silla_gamer.webp" alt="Sillas Gamer">
+                            <img class="card-img-top padding_top rounded" src="img/productos/silla_gamer.webp" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">SILLAS GAMERS</h4>
                                 <p class="card-text"></p>
@@ -126,13 +155,12 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/mouse_gamer.webp" alt="Mouse Gamer">
+                            <img class="card-img-top padding_top rounded" src="img/productos/mouse_gamer.webp" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">MOUSE</h4>
                                 <p class="card-text"></p>
-                                
                                 <div class="padding_top">
                                     <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
                                 </div>
@@ -145,12 +173,13 @@
 
     <div class="container py-5">
         <div class="row justify-content-center">
-                    <div class="col-md-4 mb-4">
+            
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/mousepadgamer.jpg" alt="Mousepad.">
+                            <img class="card-img-top padding_top rounded" src="img/productos/mousepadgamer.jpg" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">MOUSEPAD</h4>
-                                <p class="card-text"></p>
+                                <p class="card-text pt-4"></p>
                                 <div class="padding_top">
                                     <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
                                 </div>
@@ -158,9 +187,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/poleras_gamer.webp" alt="Poleras personalizadas.">
+                            <img class="card-img-top padding_top rounded" src="img/productos/poleras_gamer.webp" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">POLERAS PERSONALIZADAS</h4>
                                 <p class="card-text"></p>
@@ -171,13 +200,12 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/poleron-mario-bros.png" alt="Polerones personalizados.">
+                            <img class="card-img-top padding_top rounded" src="img/productos/poleron-mario-bros.png" alt="Card image">
                             <div class="card-body">
                                 <h4 class="card-title">POLERONES PERSONALIZADOS</h4>
                                 <p class="card-text"></p>
-                                
                                 <div class="padding_top">
                                     <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
                                 </div>
@@ -186,31 +214,12 @@
                     </div>           
         </div>
     </div>
-
-
-
-    <div class="container py-5">
-        <div class="row justify-content-center">
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img class="card-img-top padding_top rounded" src="img/productos/lotrReal.png" alt="Figuras.">
-                            <div class="card-body">
-                                <h4 class="card-title">FIGURAS</h4>
-                                <p class="card-text"></p>
-                                <div class="padding_top">
-                                    <a style="background-color: #1E90FF;" href="#" class="btn btn-primary">EXPLORAR CATALOGO</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>         
-        </div>
-    </div>
 </div>
 
-      <!-- Footer de ejemplo que quiza usemos de final lol-->
+    
+       <!-- Footer de ejemplo que quiza usemos de final lol-->
   <footer class="py-3 my-4 bg-black orbitron ">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sample</a></li>

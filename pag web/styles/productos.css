@@ -3,11 +3,18 @@
 }
 
 .card .card-img-top {
-  height: 300px; 
-  object-fit: cover;
+  max-width: 100%;
+  width: fit-content;
 }
 
 .row.align-items-stretch {
   display: flex;
   flex-wrap: wrap;
 }
+
+.card-img-top {
+  width: 250px;
+  height: 250px;   /* mismo alto para todas */
+  object-fit: cover;
+}
+
