@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Config default-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figuras</title>
+  <!-- Cargar librerias Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/productos.css">
+  <link rel="stylesheet" href="styles/filtro.css">
+  <link rel="stylesheet" href="styles/LINKEARtarjeta.css">
+  <script src="js/menus.js"></script>
+
+</head>
+
+<body class="m-0" style="background-color: black;">
+
+    <div class="container py-5" data-bs-theme="dark">
+
+        <!-- barra de filtro-->
+
+        <!-- lo añadimos a una columna-->
+        <div class="row">
+            <!-- hacemos que cada columna tenga un espaciado de 3 (de 12)-->
+            <div class="col-md-3 mb-4">
+
+                <!-- declaramos un aside para nuestra "barra lateral", la cual declaramos en el class, donde le damos un padding de 3 con bordes redondeados-->
+                <aside class="sidebar-filters p-3 border rounded">
+                    <!--titulo de la barra -->
+                    <h4 class="mb-3">Filtros</h4>
+
+                    <!--en esta division creamos una checkbox del fabricante -->
+                    <div class="mb-4">
+                        <h5 class="mb-2">Fabricante</h5>
+                        <!-- aqui designamos los valores a marcar-->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Lord of the Rings Toys"
+                                id="fabricanteLOTR">
+                            <label class="form-check-label" for="fabricanteLOTR">
+                                Lord of the Rings Toys
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Other Toys" id="fabricanteOther">
+                            <label class="form-check-label" for="fabricanteOther">
+                                Other Toys
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">Distribuidor</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Lord of the Rings Toys"
+                                id="distribuidorLOTR">
+                            <label class="form-check-label" for="distribuidorLOTR">
+                                Lord of the Rings Toys
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Other Distributer"
+                                id="distribuidorOther">
+                            <label class="form-check-label" for="distribuidorOther">
+                                Otro Distruibuidor
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-2">Precio</h5>
+                        <input type="range" class="form-range" min="0" max="100000" step="1000" id="precioRange">
+                        <!-- aplicamos un d-flex para que los elementos dentro de este div se puedan alterar-->
+                        <div class="d-flex justify-content-between">
+                            <span id="minPrice">$0</span>
+                            <span id="maxPrice">$100.000</span>
+                        </div>
+                    </div>
+
+                    <!-- con d-grid hacemos que los objetos dentro del div se ordenen en forma de cuadricula
+                     y con el gap indicamos la distancia de separacion entre esas cuadriculas, que es 2-->
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="button">Aplicar filtros</button>
+                        <button class="btn btn-outline-secondary" type="button">Limpiar filtros</button>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="m-0" style="color: white;">4 resultados</h5> <!-- ESTO ES ESTATICO -->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownOrdenar"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Ordenar por
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownOrdenar">
+                            <li><a class="dropdown-item" href="#">Precio: de menor a mayor</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: de mayor a menor</a></li>
+                            <li><a class="dropdown-item" href="#">Nombre: A-Z</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!-- productos -->
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <a href="htmlFIGURAS/INFOfiguraDeFrodoYgollum.html" class="card-link">
+                            <div class="card h-100">
+                                <img class="card-img-top padding_top rounded w-100"
+                                    src="img/productos/IMAGENES_DE_FIGURAS/frodoIMGchetaaPNG.png" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title text-white">Frodo</h4>
+                                    <p class="card-text text-lightgray">
+                                        Fabricante: Lord of the Rings Toys <br>
+                                        Distribuidor: Lord of the Rings Toys
+                                    </p>
+                                    <div class="padding_top">
+                                        <div style="background-color: #1E90FF;" class="btn btn-primary">$29.990</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <a href="htmlFIGURAS/INFOfiguraDeGandalfElGris.html" class="card-link">
+                            <div class="card h-100">
+                                <img class="card-img-top padding_top rounded w-100"
+                                    src="img/productos/IMAGENES_DE_FIGURAS/gandaflIMGcheta.png" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title text-white">Gandalf el gris</h4>
+                                    <p class="card-text text-lightgray">
+                                        Fabricante: Lord of the Rings Toys <br>
+                                        Distribuidor: Lord of the Rings Toys
+                                    </p>
+                                    <div class="padding_top">
+                                        <div style="background-color: #1E90FF;" class="btn btn-primary">$29.990</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <a href="htmlFIGURAS/INFOfiguraDeGimli.html" class="card-link">
+                            <div class="card h-100">
+                                <img class="card-img-top padding_top rounded w-100"
+                                    src="img/productos/IMAGENES_DE_FIGURAS/gimliIMGcheta.jpg" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title text-white">Gimli</h4>
+                                    <p class="card-text text-lightgray">
+                                        Fabricante: Lord of the Rings Toys <br>
+                                        Distribuidor: Lord of the Rings Toys
+                                    </p>
+                                    <div class="padding_top">
+                                        <div style="background-color: #1E90FF;" class="btn btn-primary">$29.990</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <a href="htmlFIGURAS/INFOfiguraLelogas.html" class="card-link">
+                            <div class="card h-100">
+                                <img class="card-img-top padding_top rounded w-100"
+                                    src="img/productos/IMAGENES_DE_FIGURAS/figuraDeLegolas.webp" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title text-white">Legolas</h4>
+                                    <p class="card-text text-lightgray">
+                                        Fabricante: Lord of the Rings Toys <br>
+                                        Distribuidor: Lord of the Rings Toys
+                                    </p>
+                                    <div class="padding_top">
+                                        <div style="background-color: #1E90FF;" class="btn btn-primary">$29.990</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

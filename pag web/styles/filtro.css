@@ -49,19 +49,7 @@
 /* ESTILOS PARA EL ORDENAMIENTO   */
 /* ---------------------------------- */
 
-.dropdown-menu {
-    background-color: #212529; /* Fondo del menú desplegable */
-    color: #f0f0f0;
-    border: 1px solid #444;
-}
 
-.dropdown-item {
-    color: #f0f0f0; /* Color del texto de las opciones */
-}
-
-.dropdown-item:hover {
-    background-color: #343a40; /* Fondo de la opción al pasar el mouse */
-}
 
 /* ---------------------------------- */
 /* ESTILOS PARA BOTONES         */
