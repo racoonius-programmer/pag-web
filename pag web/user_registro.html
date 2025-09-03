@@ -31,16 +31,32 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
+
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Link</a>
+            <a class="nav-link" href="sobreLEVEL-UP.html">¿Quienes somos?</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Link</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Productos
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="htmlFIGURAS/figurasPRODUCTO.html">Figuras</a></li>
+              <li><a class="dropdown-item" href="#">Juegos de mesa</a></li>
+              <li><a class="dropdown-item" href="#">Accesorios</a></li>
+              <li><a class="dropdown-item" href="#">Consolas</a></li>
+              <li><a class="dropdown-item" href="#">Computadores gamers</a></li>
+              <li><a class="dropdown-item" href="#">Sillas gamer</a></li>
+              <li><a class="dropdown-item" href="#">Mouse</a></li>
+              <li><a class="dropdown-item" href="#">MousePad</a></li>
+              <li><a class="dropdown-item" href="#">Poleras/Polerones personalizados</a></li>
+              <hr class="dropdown-divider">
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="productos.html"> Productos</a>
-          </li>
+          <li><a class="dropdown-item" href="#">Lo más vendido</a></li>
         </ul>
+        </li>
+        </ul>
+
         <form class="d-flex" action="main.html" method="get">
           <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
           <button class="btn btn-primary" type="submit">Buscar</button>
@@ -86,7 +102,7 @@
 
               <div>
                 <label for="f_usr" class="form-label text-light">Correo:</label><br>
-                <input type="email" id="correo" required class="form-control" name="correo" value=""><br>
+                <input type="email" required id="correo" class="form-control" name="correo" value=""><br>
               </div>
 
               <div>
@@ -99,6 +115,52 @@
                 <input type="password" required id="confirmar_contrasena" class="form-control"
                   name="confirmar_contrasena" value=""><br>
               </div>
+
+              <div>
+                <label for="lname" class="form-label text-light">Telefono (opcional)</label><br>
+                <input type="number" id="telefono" class="form-control" name="telefono" value=""><br>
+              </div>
+
+
+              <div class="row">
+                <div class="col-12 form-label text-light">
+                  <form id="commentForm">
+                    <div class="mb-3">
+                      <label for="lname" class="form-label text-light">Region</label><br>
+                      <select class="form-select" id="elegirRegion" name="region">
+                        <option value="1">Región de Arica y Parinacota</option>
+                        <option value="2">Región de Tarapacá</option>
+                        <option value="3">Región de Antofagasta</option>
+                        <option value="4">Región de Atacama</option>
+                        <option value="5">Región de Coquimbo</option>
+                        <option value="6">Región de Valparaíso</option>
+                        <option value="7">Región Metropolitana de Santiago</option>
+                        <option value="8">Región del Libertador General Bernardo O'Higgins</option>
+                        <option value="9">Región del Maule</option>
+                        <option value="10">Región de Ñuble</option>
+                        <option value="11">Región del Biobío</option>
+                        <option value="12">Región de La Araucanía</option>
+                        <option value="13">Región de Los Ríos</option>
+                        <option value="14">Región de Los Lagos</option>
+                        <option value="15">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                        <option value="16">Región de Magallanes y de la Antártica Chilena</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+              <div>
+                <label for="lname" class="form-label text-light">Ciudad</label><br>
+                <input type="text" required id="ciudad" class="form-control" name="ciudad" value=""><br>
+              </div>
+
+              <div>
+                <label for="lname" class="form-label text-light">Direccion</label><br>
+                <input type="text" required id="Direccion" class="form-control" name="direccion" value=""><br>
+              </div>
+
 
               <div>
                 <button type="submit" class="btn btn-azul-electrico">Registrarme</button>
