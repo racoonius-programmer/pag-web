@@ -21,16 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="figurasPRODUCTO.html">Figuras</a></li>
-                  <li><a class="dropdown-item" href="#">Juegos de mesa</a></li>
-                  <li><a class="dropdown-item" href="#">Accesorios</a></li>
-                  <li><a class="dropdown-item" href="#">Consolas</a></li>
-                  <li><a class="dropdown-item" href="#">Computadores gamers</a></li>
-                  <li><a class="dropdown-item" href="#">Sillas gamer</a></li>
-                  <li><a class="dropdown-item" href="#">Mouse</a></li>
-                  <li><a class="dropdown-item" href="#">MousePad</a></li>
-                  <li><a class="dropdown-item" href="#">Poleras/Polerones personalizados</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Lo más vendido</a></li>
+                  <li><a class="dropdown-item" href="juegos_de_mesa_PRODUCTOS.html">Juegos de mesa</a></li>
+                  <li><a class="dropdown-item" href="accesoriosPRODUCTO.html">Accesorios</a></li>
+                  <li><a class="dropdown-item" href="consolasPRODUCTO.html">Consolas</a></li>
+                  <li><a class="dropdown-item" href="computadoras_gamerPRODUCTO.html">Computadores gamers</a></li>
+                  <li><a class="dropdown-item" href="sillas_gamerPRODUCTO.html">Sillas gamer</a></li>
+                  <li><a class="dropdown-item" href="mousePRODUCTO.html">Mouse</a></li>
+                  <li><a class="dropdown-item" href="mousepadPRODUCTO.html">MousePad</a></li>
+                  <li><a class="dropdown-item" href="polerasPRODUCTO.html">Poleras/Polerones personalizados</a></li>
                 </ul>
               </li>
             </ul>
