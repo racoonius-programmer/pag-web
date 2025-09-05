@@ -1,3 +1,6 @@
+//Base de datos simulada de productos
+
+//Creamos cada una de las variables para separarlos por categorias
 const figuras = [
     {
         codigo: "FG001",
@@ -196,7 +199,7 @@ const poleras_personalizadas = [
 ];
 
 
-
+//Creamos una constante con todos los productos para llamarlos en productos.html
 const todosLosProductos = [
     ...figuras,
     ...juegos_de_mesa,

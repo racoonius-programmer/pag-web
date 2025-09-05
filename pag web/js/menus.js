@@ -1,3 +1,4 @@
+//Para generar el header en todas las páginas
 document.addEventListener('DOMContentLoaded', function () {
   const navbarHTML = `
       <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
@@ -31,10 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a class="dropdown-item" href="productos.html?categoria=mousepad">MousePad</a></li>
     <li><a class="dropdown-item" href="productos.html?categoria=poleras_personalizadas">Poleras/Polerones personalizados</a></li>
   </ul>
+                <li class="nav-item">
+                <a class="nav-link" href="eventos.html">Eventos</a>
+              </li>
 </li>
 
                 </ul>
               </li>
+              
             </ul>
             <form class="d-flex" action="main.html" method="get">
               <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
@@ -53,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function () {
     `
     ;
 
-  // Insert the HTML into the body or a specific container
   document.body.insertAdjacentHTML('afterbegin', navbarHTML);
 });
 
+//Para insertar el footer en todas las páginas
 document.addEventListener('DOMContentLoaded', function () {
   const footerHTML = `
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -64,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Contacto</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Nosotros</a></li>
+          <li class="nav-item"><a href="sobreLEVEL-UP.html" class="nav-link px-2 text-light">¿Quiénes somos?</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sucursales</a></li>
         </ul>
         <p class="text-center text-light">© 2025 Level-Up Gamer</p>
@@ -82,6 +87,5 @@ document.addEventListener('DOMContentLoaded', function () {
       </footer>
     `;
 
-  // Insert the HTML at the end of the body
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 });

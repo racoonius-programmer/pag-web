@@ -1,3 +1,4 @@
+//Genera automaticamente la producto-detalles.html sacando los datos del producto
 function renderizarPaginaProducto(producto) {
     const contenedor = document.getElementById('product-container');
     if (!contenedor) return;
@@ -75,7 +76,7 @@ function renderizarPaginaProducto(producto) {
         alert(`¡${producto.nombre} añadido a la lista de deseos!`);
     });
 
-    // Comentarios simulados iniciales
+    // Comentarios simulados para testear
     const comentariosSimulados = [
         {
             usuario: "María López",
@@ -129,7 +130,7 @@ function renderizarPaginaProducto(producto) {
             alert("Por favor, selecciona una puntuación y escribe un comentario.");
             return;
         }
-
+        //Por ahora manejaremos nuestro usuario como anónimo
         comentariosSimulados.unshift({
             usuario: "Usuario Anónimo",
             calificacion: score,

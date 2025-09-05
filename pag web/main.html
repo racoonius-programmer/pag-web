@@ -85,66 +85,14 @@
   <!-- Interfaz -->
   <div data-bs-theme="dark">
     <br>
-    <h1 style="text-align: center; font-weight: bolder; margin-top: 10px;" class="text-light">Lo más vendido</h1>
-    <div class="container py-5">
-      <div class="row justify-content-center" >
+<h1 style="text-align: center; font-weight: bolder; margin-top: 10px;" class="text-light">Lo más vendido</h1>
+<div class="container py-5">
+  <div class="row justify-content-center" id="mas-vendidos">
+    <!-- Aquí se insertan las cards dinámicamente -->
+  </div>
+</div>
+</div>
 
-    <div class="col-md-4 mb-4">
-        <a href="../htmlFIGURAS/INFOfiguraDeFrodoYgollum.html" class="card-link">
-            <div class="card h-100">
-                <img class="card-img-top padding_top rounded w-100"
-                    src="img/main/dios.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title text-white">Dios</h4>
-                    <p class="card-text text-lightgray">
-                        Fabricante: ??? <br>
-                        Distribuidor: ???
-                    </p>
-                    <div class="padding_top">
-                        <div style="background-color: #1E90FF;" class="btn btn-primary">$1.000</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-md-4 mb-4">
-        <a href="../htmlFIGURAS/INFOfiguraDeFrodoYgollum.html" class="card-link">
-            <div class="card h-100">
-                <img class="card-img-top padding_top rounded w-100"
-                    src="img/main/dios.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title text-white">Dios</h4>
-                    <p class="card-text text-lightgray">
-                        Fabricante: ??? <br>
-                        Distribuidor: ???
-                    </p>
-                    <div class="padding_top">
-                        <div style="background-color: #1E90FF;" class="btn btn-primary">$1.000</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-md-4 mb-4">
-        <a href="../htmlFIGURAS/INFOfiguraDeFrodoYgollum.html" class="card-link">
-            <div class="card h-100">
-                <img class="card-img-top padding_top rounded w-100"
-                    src="img/main/dios.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title text-white">Dios</h4>
-                    <p class="card-text text-lightgray">
-                        Fabricante: ??? <br>
-                        Distribuidor: ???
-                    </p>
-                    <div class="padding_top">
-                        <div style="background-color: #1E90FF;" class="btn btn-primary">$1.000</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
 
   </div>
   </div>
@@ -152,18 +100,26 @@
   </div>
 
 <div class="container">
-  <div class="mt-4 p-5 bg-verde-neon text-white rounded d-flex justify-content-between align-items-center">
-    <div>
-      <h1>¿Necesitas servicio técnico?</h1>
-      <p>Contáctanos a nuestro Whatsapp</p>
+  <a href="https://api.whatsapp.com/send?phone=56984543683&text=¡Hola!" class="link-completo">
+    <div class="mt-4 p-5 bg-verde-neon text-white rounded d-flex justify-content-between align-items-center">
+      <div>
+        <h1>¿Necesitas servicio técnico?</h1>
+        <p>Contáctanos a nuestro Whatsapp</p>
+      </div>
+      <img src="img/main/whatsapp-logo.png" alt="whatsapp-logo" class="img-fluid" style="max-width: 150px;">
     </div>
-    <a href="productos.html">
-    <img src="img/main/whatsapp-logo.png" alt="whatsapp-logo" class="img-fluid" style="max-width: 150px;">
   </a>
-  </div>
 </div>
 
 <script src="js/menus.js"></script>
+<script src="js/productos-db.js"></script>
+<script src="js/productos-fun.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    mostrarMasVendidos();
+  });
+</script>
+
 
 </body>
 

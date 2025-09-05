@@ -71,3 +71,12 @@ main {
     margin-top: 0; /* Opcional para que no se desplace */
 }
 
+.link-completo {
+  display: block;      /* Que ocupe todo el ancho del contenedor */
+  text-decoration: none; /* Evita subrayado en los textos */
+  color: inherit;        /* Mantiene el color del texto original */
+}
+.link-completo img {
+  pointer-events: none; /* Evita que la imagen bloquee el clic */
+}
+
