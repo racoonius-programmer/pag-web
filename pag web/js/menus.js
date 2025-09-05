@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const navbarHTML = `
+  const navbarHTML = `
       <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
         <div class="container-fluid">
           <a href="main.html">
@@ -15,20 +15,24 @@ document.addEventListener('DOMContentLoaded', function () {
               <li class="nav-item">
                 <a class="nav-link" href="sobreLEVEL-UP.html">¿Quienes somos?</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Productos
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="figurasPRODUCTO.html">Figuras</a></li>
-                  <li><a class="dropdown-item" href="juegos_de_mesa_PRODUCTOS.html">Juegos de mesa</a></li>
-                  <li><a class="dropdown-item" href="accesoriosPRODUCTO.html">Accesorios</a></li>
-                  <li><a class="dropdown-item" href="consolasPRODUCTO.html">Consolas</a></li>
-                  <li><a class="dropdown-item" href="computadoras_gamerPRODUCTO.html">Computadores gamers</a></li>
-                  <li><a class="dropdown-item" href="sillas_gamerPRODUCTO.html">Sillas gamer</a></li>
-                  <li><a class="dropdown-item" href="mousePRODUCTO.html">Mouse</a></li>
-                  <li><a class="dropdown-item" href="mousepadPRODUCTO.html">MousePad</a></li>
-                  <li><a class="dropdown-item" href="polerasPRODUCTO.html">Poleras/Polerones personalizados</a></li>
+<li class="nav-item dropdown">
+  <!-- Link principal -->
+  <a class="nav-link" href="productos.html" id="productosDropdown">Productos</a>
+
+  <!-- Dropdown que se activa al pasar el mouse -->
+  <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+    <li><a class="dropdown-item" href="productos.html?categoria=figuras">Figuras</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=juegos_de_mesa">Juegos de mesa</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=accesorios">Accesorios</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=consolas">Consolas</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=computadoras_gamer">Computadores gamers</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=sillas_gamer">Sillas gamer</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=mouse">Mouse</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=mousepad">MousePad</a></li>
+    <li><a class="dropdown-item" href="productos.html?categoria=poleras_personalizadas">Poleras/Polerones personalizados</a></li>
+  </ul>
+</li>
+
                 </ul>
               </li>
             </ul>
@@ -49,12 +53,12 @@ document.addEventListener('DOMContentLoaded', function () {
     `
     ;
 
-    // Insert the HTML into the body or a specific container
-    document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+  // Insert the HTML into the body or a specific container
+  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const footerHTML = `
+  const footerHTML = `
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
       <footer class="py-3 bg-black orbitron ">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -78,6 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
       </footer>
     `;
 
-    // Insert the HTML at the end of the body
-    document.body.insertAdjacentHTML('beforeend', footerHTML);
+  // Insert the HTML at the end of the body
+  document.body.insertAdjacentHTML('beforeend', footerHTML);
 });

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/LINKEARtarjeta.css">
+    <link rel="stylesheet" href="styles/productos.css">
+</head>
+<body style="background-color: black;">
+
+    <div class="container py-5" id="product-container"></div>
+
+<script src="js/productos.js"></script>
+<script src="js/venta.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productCode = urlParams.get('codigo');
+
+    const productoSeleccionado = todosLosProductos.find(p => p.codigo === productCode);
+
+    if (productoSeleccionado) {
+        renderizarPaginaProducto(productoSeleccionado);
+    } else {
+        document.getElementById('product-container').innerHTML =
+            '<h2 class="text-center">Producto no encontrado.</h2>';
+    }
+});
+</script>
+    <script src="js/productos-db.js"></script> <!-- Datos de productos -->
+    <script src="js/productos-fun.js"></script> <!-- Funciones para mostrar productos -->
+<script src="js/menus.js"></script>
+</body>
+</html>

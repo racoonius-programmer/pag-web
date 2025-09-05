@@ -65,4 +65,9 @@ main {
   flex: 1;
 }
 
+/* Abrir dropdown al pasar el mouse */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* Opcional para que no se desplace */
+}
 
