@@ -64,7 +64,7 @@ const juegos_de_mesa = [
         distribuidor: "Distribuidora Catan",
         Marca: "Catan Studio",
         Material: "Cartón y plástico de calidad",
-        Descripcion: "Juego de estrategia clásico donde colonizas la isla de Catan, intercambiando recursos y construyendo asentamientos.",
+        Descripcion: "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan. Ideal para 3-4 jugadores y perfecto para noches de juego en familia o con amigos.",
         enlace: "producto-detalle.html?codigo=JM001"
     },
     {
@@ -76,7 +76,7 @@ const juegos_de_mesa = [
         distribuidor: "Devir Chile",
         Marca: "Rio Grande Games",
         Material: "Cartón y fichas de madera",
-        Descripcion: "Juego de colocación de losetas donde construyes ciudades, caminos y monasterios en la región medieval de Carcassonne.",
+        Descripcion: "Un juego de colocación de fichas donde los jugadores construyen el paisaje alrededor de la fortaleza medieval de Carcassonne. Ideal para 2-5 jugadores y fácil de aprender.",
         enlace: "producto-detalle.html?codigo=JM002"
     }
 ];
@@ -91,7 +91,7 @@ const accesorios = [
         distribuidor: "Xbox Chile",
         Marca: "Xbox",
         Material: "Plástico y componentes electrónicos",
-        Descripcion: "Control inalámbrico oficial de Xbox Series X, con ergonomía y precisión para gaming competitivo.",
+        Descripcion: "Ofrece una experiencia de juego cómoda con botones mapeables y una respuesta táctil mejorada. Compatible con consolas Xbox y PC.",
         enlace: "producto-detalle.html?codigo=AC001"
     },
     {
@@ -103,7 +103,7 @@ const accesorios = [
         distribuidor: "HyperX Chile",
         Marca: "HyperX",
         Material: "Plástico, cuero sintético y componentes electrónicos",
-        Descripcion: "Auriculares gamer con sonido envolvente, micrófono desmontable y gran comodidad para largas sesiones de juego.",
+        Descripcion: "Proporcionan un sonido envolvente de calidad con un micrófono desmontable y almohadillas de espuma viscoelástica para mayor comodidad durante largas sesiones de juego",
         enlace: "producto-detalle.html?codigo=AC002"
     }
 ];
@@ -118,7 +118,7 @@ const consolas = [
         distribuidor: "Sony Chile",
         Marca: "Sony",
         Material: "Plástico y componentes electrónicos",
-        Descripcion: "Consola de última generación con gráficos de alta calidad, carga ultrarrápida y gran biblioteca de juegos.",
+        Descripcion: "La consola de última generación de Sony, que ofrece gráficos impresionantes y tiempos de carga ultrarrápidos para una experiencia de juego inmersiva.",
         enlace: "producto-detalle.html?codigo=CO001"
     }
 ];
@@ -133,7 +133,7 @@ const pc_gamer = [
         distribuidor: "Asus Chile",
         Marca: "Asus",
         Material: "Metal, plástico y componentes electrónicos",
-        Descripcion: "PC gamer de alto rendimiento con procesador potente, tarjeta gráfica avanzada y sistema de refrigeración optimizado.",
+        Descripcion: "Un potente equipo diseñado para los gamers más exigentes, equipado con los últimos componentes para ofrecer un rendimiento excepcional en cualquier juego.",
         enlace: "producto-detalle.html?codigo=CG001"
     }
 ];
@@ -148,7 +148,7 @@ const sillas_gamer = [
         distribuidor: "Secret Lab",
         Marca: "Secret Lab",
         Material: "Cuero sintético y espuma de alta densidad",
-        Descripcion: "Silla ergonómica para gamers, ajustable y cómoda, ideal para largas sesiones de juego.",
+        Descripcion: "Diseñada para el máximo confort, esta silla ofrece un soporte ergonómico y personalización ajustable para sesiones de juego prolongadas.",
         enlace: "producto-detalle.html?codigo=SG001"
     }
 ];
@@ -163,7 +163,7 @@ const mouse = [
         distribuidor: "Logitech Chile",
         Marca: "Logitech",
         Material: "Plástico y componentes electrónicos",
-        Descripcion: "Mouse gamer de alta precisión con múltiples botones programables y sensor HERO 16K para juegos competitivos.",
+        Descripcion: "Con sensor de alta precisión y botones personalizables, este mouse es ideal para gamers que buscan un control preciso y personalización.",
         enlace: "producto-detalle.html?codigo=MS001"
     }
 ];
@@ -178,7 +178,7 @@ const mousepad = [
         distribuidor: "Razer",
         Marca: "Razer",
         Material: "Tela y base de goma antideslizante",
-        Descripcion: "Mousepad extendido con iluminación Chroma, superficie optimizada para precisión y velocidad.",
+        Descripcion: "Ofrece un área de juego amplia con iluminación RGB personalizable, asegurando una superficie suave y uniforme para el movimiento del mouse.",
         enlace: "producto-detalle.html?codigo=MP001"
     }
 ];
@@ -193,7 +193,7 @@ const poleras_personalizadas = [
         distribuidor: "Level-Up Gamer",
         Marca: "Level-Up Gamer",
         Material: "Algodón de alta calidad",
-        Descripcion: "Polera gamer personalizada con diseño 'Level-Up', cómoda y resistente para gamers de corazón.",
+        Descripcion: "Una camiseta cómoda y estilizada, con la posibilidad de personalizarla con tu gamer tag o diseño favorito.",
         enlace: "producto-detalle.html?codigo=PP001"
     }
 ];
