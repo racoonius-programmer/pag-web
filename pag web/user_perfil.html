@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <script src="js/menus.js"></script>
+</head>
+<body style="background-color: #242729;">
+
+<div class="container p-5">
+    <h2 class="text-light text-center mb-4">Mi Perfil</h2>
+
+    <div class="card p-4 bg-dark text-light">
+        <div class="text-center mb-4">
+            <img id="fotoPerfil" src="img/header/user-logo-generic-white-alt.png" alt="Foto de perfil" 
+                 class="rounded-circle" width="120" height="120">
+        </div>
+
+        <form id="perfilForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Nombre de usuario:</label>
+                <input type="text" class="form-control" id="username">
+            </div>
+
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo:</label>
+                <input type="email" class="form-control" id="correo" disabled>
+            </div>
+
+            <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
+                <input type="date" class="form-control" id="fechaNacimiento" disabled>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" class="form-control" id="telefono">
+            </div>
+
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección:</label>
+                <input type="text" class="form-control" id="direccion">
+            </div>
+
+            <!-- Región -->
+            <div class="mb-3">
+                <label for="elegirRegion" class="form-label">Región:</label>
+                <select class="form-select" id="elegirRegion" name="region">
+                  <option value="Arica y Parinacota">Región de Arica y Parinacota</option>
+                  <option value="Tarapacá">Región de Tarapacá</option>
+                  <option value="Antofagasta">Región de Antofagasta</option>
+                  <option value="Atacama">Región de Atacama</option>
+                  <option value="Coquimbo">Región de Coquimbo</option>
+                  <option value="Valparaíso">Región de Valparaíso</option>
+                  <option value="Metropolitana de Santiago">Región Metropolitana de Santiago</option>
+                  <option value="O'Higgins">Región del Libertador General Bernardo O'Higgins</option>
+                  <option value="Maule">Región del Maule</option>
+                  <option value="Ñuble">Región de Ñuble</option>
+                  <option value="Biobío">Región del Biobío</option>
+                  <option value="La Araucanía">Región de La Araucanía</option>
+                  <option value="Los Ríos">Región de Los Ríos</option>
+                  <option value="Los Lagos">Región de Los Lagos</option>
+                  <option value="Aysén">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                  <option value="Magallanes">Región de Magallanes y de la Antártica Chilena</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="fotoUrl" class="form-label">URL de la foto de perfil:</label>
+                <input type="text" class="form-control" id="fotoUrl">
+            </div>
+
+            <button type="button" id="guardarCambios" class="btn btn-primary w-100">Guardar cambios</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+
+    if (!usuario) {
+        alert("Debes iniciar sesión primero.");
+        window.location.href = "user_inicio_sesion.html";
+        return;
+    }
+
+    // Llenar formulario
+    document.getElementById("username").value = usuario.username || "";
+    document.getElementById("correo").value = usuario.correo || "";
+    document.getElementById("fechaNacimiento").value = usuario.fechaNacimiento || "";
+    document.getElementById("telefono").value = usuario.telefono || "";
+    document.getElementById("direccion").value = usuario.direccion || "";
+    document.getElementById("fotoUrl").value = usuario.fotoPerfil || "";
+    document.getElementById("elegirRegion").value = usuario.region || "Metropolitana de Santiago";
+    if (usuario.fotoPerfil) document.getElementById("fotoPerfil").src = usuario.fotoPerfil;
+
+    // Actualizar foto en tiempo real
+    document.getElementById("fotoUrl").addEventListener("input", (e) => {
+        document.getElementById("fotoPerfil").src = e.target.value || "img/header/user-logo-generic-white-alt.png";
+    });
+
+    // Guardar cambios
+    document.getElementById("guardarCambios").addEventListener("click", () => {
+        usuario.username = document.getElementById("username").value;
+        usuario.telefono = document.getElementById("telefono").value;
+        usuario.direccion = document.getElementById("direccion").value;
+        usuario.fotoPerfil = document.getElementById("fotoUrl").value;
+        usuario.region = document.getElementById("elegirRegion").value;
+
+        // Actualizar localStorage
+        localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+
+        alert("Cambios guardados (simulación visual).");
+    });
+});
+</script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar sesión</title>
-  <!-- Cargar librerias Bootstrap -->
+  <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
 
@@ -15,22 +15,20 @@
 
   <link rel="stylesheet" href="styles/fonts.css">
   <script src="js/menus.js"></script>
-
 </head>
 
 <body class="m-0" style="background-color: #242729;">
 
   <div class="p-5 rounded container">
-    <!-- re envia al main por ahora, hasta implementar backend-->
     <h3 class="text-light" style="text-align: center; font-weight: bold;">Inicio de Sesión</h3>
-    <form action="main.html" method="get">
+    <form id="loginForm">
       <div class="mb-3 mt-3">
         <label for="email" class="form-label text-light">Correo:</label>
-        <input type="email" class="form-control" id="email" placeholder="Introduzca un correo" name="email">
+        <input type="email" class="form-control" id="email" placeholder="Introduzca un correo" name="email" required>
       </div>
       <div class="mb-3">
-        <label for="pwd" class="form-label text-light">Constraseña:</label>
-        <input type="password" class="form-control" id="pwd" placeholder="Introduzca una contraseña" name="pswd">
+        <label for="pwd" class="form-label text-light">Contraseña:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Introduzca una contraseña" name="pswd" required>
       </div>
       <div class="form-check mb-3 text-light">
         <label class="form-check-label">
@@ -47,9 +45,10 @@
         </p>
       </div>
     </form>
-
   </div>
 
+  <!-- Importar base de datos y login -->
+  <script src="js/user_db.js"></script>
+  <script src="js/user_login.js"></script>
 </body>
-
 </html>

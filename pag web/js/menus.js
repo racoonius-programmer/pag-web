@@ -1,5 +1,9 @@
+// menus.js
+
 //Para generar el header en todas las páginas
 document.addEventListener('DOMContentLoaded', function () {
+  const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
+
   const navbarHTML = `
       <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
         <div class="container-fluid">
@@ -7,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <img src="img/header/logo_sin_fondo.png" alt="Logo" style="width:60px;">
           </a>
           <a class="navbar-brand ms-2" href="main.html">Level-up Gamer</a>
-  
+
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -16,49 +20,69 @@ document.addEventListener('DOMContentLoaded', function () {
               <li class="nav-item">
                 <a class="nav-link" href="sobreLEVEL-UP.html">¿Quienes somos?</a>
               </li>
-<li class="nav-item dropdown">
-  <!-- Link principal -->
-  <a class="nav-link" href="productos.html" id="productosDropdown">Productos</a>
-
-  <!-- Dropdown que se activa al pasar el mouse -->
-  <ul class="dropdown-menu" aria-labelledby="productosDropdown">
-    <li><a class="dropdown-item" href="productos.html?categoria=figuras">Figuras</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=juegos_de_mesa">Juegos de mesa</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=accesorios">Accesorios</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=consolas">Consolas</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=computadoras_gamer">Computadores gamers</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=sillas_gamer">Sillas gamer</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=mouse">Mouse</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=mousepad">MousePad</a></li>
-    <li><a class="dropdown-item" href="productos.html?categoria=poleras_personalizadas">Poleras/Polerones personalizados</a></li>
-  </ul>
-                <li class="nav-item">
-                <a class="nav-link" href="eventos.html">Eventos</a>
-              </li>
-</li>
-
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="productos.html" id="productosDropdown">Productos</a>
+                <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                  <li><a class="dropdown-item" href="productos.html?categoria=figuras">Figuras</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=juegos_de_mesa">Juegos de mesa</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=accesorios">Accesorios</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=consolas">Consolas</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=computadoras_gamer">Computadores gamers</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=sillas_gamer">Sillas gamer</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=mouse">Mouse</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=mousepad">MousePad</a></li>
+                  <li><a class="dropdown-item" href="productos.html?categoria=poleras_personalizadas">Poleras/Polerones personalizados</a></li>
                 </ul>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" href="eventos.html">Eventos</a>
+              </li>
             </ul>
+
             <form class="d-flex" action="main.html" method="get">
               <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
               <button class="btn btn-primary" type="submit">Buscar</button>
             </form>
+
             <a class="navbar-nav nav-link dropdown-toggle ms-3 align-items-end" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="img/header/user-logo-generic-white-alt.png" alt="Usuario" style="width: 60px;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="user_registro.html">Registro</a></li>
-              <li><a class="dropdown-item" href="user_inicio_sesion.html">Iniciar Sesión</a></li>
+              ${
+                usuarioActual
+                  ? `
+                    <li><span class="dropdown-item-text">👤 ${usuarioActual.username}</span></li>
+                    <li><a class="dropdown-item" href="user_perfil.html">Mi Perfil</a></li>
+                    ${
+                      usuarioActual.rol === "admin"
+                        ? `<li><a class="dropdown-item" href="admin_main.html">Panel de Administración</a></li>`
+                        : ''
+                    }
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" id="cerrar-sesion">Cerrar Sesión</a></li>
+                  `
+                  : `
+                    <li><a class="dropdown-item" href="user_registro.html">Registro</a></li>
+                    <li><a class="dropdown-item" href="user_inicio_sesion.html">Iniciar Sesión</a></li>
+                  `
+              }
             </ul>
           </div>
         </div>
       </nav>
-    `
-    ;
+    `;
 
   document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+
+  // Funcionalidad cerrar sesión
+  const btnCerrarSesion = document.getElementById("cerrar-sesion");
+  if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("usuarioActual");
+      window.location.href = "main.html"; // recarga al home
+    });
+  }
 });
 
 //Para insertar el footer en todas las páginas
