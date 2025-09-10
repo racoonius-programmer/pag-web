@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Productos (Admin)</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/bootstrap.bundle.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="styles/fonts.css">
+
+<script src="js/menus.js"></script>
+<script src="js/productos-db.js"></script> <!-- Productos iniciales -->
+</head>
+<body style="background-color:#242729;" class="text-light">
+
+<div class="container p-5">
+  <h2 class="text-center mb-4">Gestión de Productos</h2>
+
+  <p id="cantidadProductos" class="text-info text-center"></p>
+
+  <div class="mb-3">
+    <label for="listaProductos" class="form-label">Seleccionar producto:</label>
+    <select id="listaProductos" class="form-select"></select>
+  </div>
+
+  <div class="card bg-dark p-4 text-light">
+    <form id="productoForm">
+      <div class="mb-3">
+        <label for="codigo" class="form-label">Código:</label>
+        <input type="text" class="form-control" id="codigo" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="nombre">
+      </div>
+
+      <div class="mb-3">
+        <label for="Descripcion" class="form-label">Descripción:</label>
+        <textarea class="form-control" id="Descripcion"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="precio" class="form-label">Precio:</label>
+        <input type="number" class="form-control" id="precio">
+      </div>
+
+      <div class="mb-3">
+        <label for="fabricante" class="form-label">Fabricante:</label>
+        <input type="text" class="form-control" id="fabricante">
+      </div>
+
+      <div class="mb-3">
+        <label for="distribuidor" class="form-label">Distribuidor:</label>
+        <input type="text" class="form-control" id="distribuidor">
+      </div>
+
+      <div class="mb-3">
+        <label for="Marca" class="form-label">Marca:</label>
+        <input type="text" class="form-control" id="Marca">
+      </div>
+
+      <div class="mb-3">
+        <label for="Material" class="form-label">Material:</label>
+        <input type="text" class="form-control" id="Material">
+      </div>
+
+      <div class="mb-3">
+        <label for="imagen" class="form-label">URL de imagen:</label>
+        <input type="text" class="form-control" id="imagen">
+      </div>
+
+      <div class="text-center mb-3">
+        <img id="previewImagen" src="" alt="Vista previa" class="img-fluid rounded" style="max-height:150px; display:none;">
+      </div>
+
+      <button type="button" id="guardarCambios" class="btn btn-primary w-100 mb-2">Guardar cambios</button>
+      <button type="button" id="agregarNuevo" class="btn btn-success w-100 mb-2">Agregar nuevo producto</button>
+      <button type="button" id="eliminarProducto" class="btn btn-danger w-100">Eliminar producto</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Cargamos productos desde localStorage o inicializamos con los de productos_db.js
+  let productos = JSON.parse(localStorage.getItem("productos"));
+  if (!productos || productos.length === 0) {
+    productos = [...todosLosProductos];
+    localStorage.setItem("productos", JSON.stringify(productos));
+  }
+
+  const listaProductos = document.getElementById("listaProductos");
+  const cantidadProductos = document.getElementById("cantidadProductos");
+
+  const codigo = document.getElementById("codigo");
+  const nombre = document.getElementById("nombre");
+  const Descripcion = document.getElementById("Descripcion");
+  const precio = document.getElementById("precio");
+  const fabricante = document.getElementById("fabricante");
+  const distribuidor = document.getElementById("distribuidor");
+  const Marca = document.getElementById("Marca");
+  const Material = document.getElementById("Material");
+  const imagen = document.getElementById("imagen");
+  const previewImagen = document.getElementById("previewImagen");
+
+  function actualizarCantidad() {
+    cantidadProductos.textContent = `Productos registrados: ${productos.length}`;
+  }
+
+  function refrescarLista() {
+    listaProductos.innerHTML = productos.map((p,i) => `<option value="${i}">${p.nombre} (Código: ${p.codigo})</option>`).join('');
+    actualizarCantidad();
+  }
+
+  function cargarProducto(index) {
+    const p = productos[index];
+    if (!p) return;
+    codigo.value = p.codigo || "";
+    nombre.value = p.nombre || "";
+    Descripcion.value = p.Descripcion || p.Descripcion || "";
+    precio.value = p.precio || 0;
+    fabricante.value = p.fabricante || "";
+    distribuidor.value = p.distribuidor || "";
+    Marca.value = p.Marca || "";
+    Material.value = p.Material || "";
+    imagen.value = p.imagen || p.imagen || "";
+    previewImagen.src = p.imagen || "";
+    previewImagen.style.display = p.imagen ? "block" : "none";
+  }
+
+  function guardarProductos() {
+    localStorage.setItem("productos", JSON.stringify(productos));
+  }
+
+  // Vista previa
+  imagen.addEventListener("input", () => {
+    previewImagen.src = imagen.value;
+    previewImagen.style.display = imagen.value ? "block" : "none";
+  });
+
+  // Guardar cambios
+  document.getElementById("guardarCambios").addEventListener("click", () => {
+    const index = listaProductos.value;
+    if (productos[index]) {
+      productos[index].nombre = nombre.value;
+      productos[index].Descripcion = Descripcion.value;
+      productos[index].precio = parseFloat(precio.value) || 0;
+      productos[index].fabricante = fabricante.value;
+      productos[index].distribuidor = distribuidor.value;
+      productos[index].Marca = Marca.value;
+      productos[index].Material = Material.value;
+      productos[index].imagen = imagen.value;
+
+      guardarProductos();
+      alert("Cambios guardados en producto: " + productos[index].nombre);
+      refrescarLista();
+      listaProductos.value = index;
+    }
+  });
+
+  // Agregar producto
+  document.getElementById("agregarNuevo").addEventListener("click", () => {
+    const nuevo = {
+      codigo: "NEW" + (productos.length + 1),
+      nombre: "Nuevo Producto",
+      Descripcion: "",
+      precio: 0,
+      fabricante: "",
+      distribuidor: "",
+      Marca: "",
+      Material: "",
+      imagen: "",
+      enlace: "#"
+    };
+    productos.push(nuevo);
+    guardarProductos();
+    refrescarLista();
+    listaProductos.value = productos.length - 1;
+    cargarProducto(productos.length - 1);
+  });
+
+  // Eliminar producto
+  document.getElementById("eliminarProducto").addEventListener("click", () => {
+    const index = listaProductos.value;
+    if (productos[index] && confirm("¿Eliminar producto: " + productos[index].nombre + "?")) {
+      productos.splice(index, 1);
+      guardarProductos();
+      refrescarLista();
+      if (productos.length > 0) {
+        listaProductos.value = 0;
+        cargarProducto(0);
+      } else {
+        document.getElementById("productoForm").reset();
+        previewImagen.style.display = "none";
+      }
+    }
+  });
+
+  // Cambiar producto desde lista
+  listaProductos.addEventListener("change", (e) => {
+    cargarProducto(e.target.value);
+  });
+
+  // Inicialización
+  refrescarLista();
+  if (productos.length > 0) cargarProducto(0);
+});
+</script>
+</body>
+</html>

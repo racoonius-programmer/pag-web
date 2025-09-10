@@ -289,3 +289,110 @@ function mostrarMasVendidos() {
     }).join('');
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoriaParam = urlParams.get('categoria');
+
+    // Primero intentamos obtener los productos desde localStorage
+    let productosGuardados = JSON.parse(localStorage.getItem("productos"));
+
+    // Si no hay productos guardados, usamos los de todosLosProductos
+    if (!productosGuardados || productosGuardados.length === 0) {
+        productosGuardados = [...todosLosProductos];
+        localStorage.setItem("productos", JSON.stringify(productosGuardados));
+    }
+
+    // Objeto con todas las categorías
+    const categorias = {
+        figuras: productosGuardados.filter(p => p.categoria === "figuras"),
+        juegos_de_mesa: productosGuardados.filter(p => p.categoria === "juegos_de_mesa"),
+        accesorios: productosGuardados.filter(p => p.categoria === "accesorios"),
+        consolas: productosGuardados.filter(p => p.categoria === "consolas"),
+        computadoras_gamer: productosGuardados.filter(p => p.categoria === "computadoras_gamer"),
+        sillas_gamer: productosGuardados.filter(p => p.categoria === "sillas_gamer"),
+        mouse: productosGuardados.filter(p => p.categoria === "mouse"),
+        mousepad: productosGuardados.filter(p => p.categoria === "mousepad"),
+        poleras_personalizadas: productosGuardados.filter(p => p.categoria === "poleras_personalizadas"),
+        todos: productosGuardados
+    };
+
+    // Seleccionar productos según la categoría o mostrar todos si no existe
+    const productosAMostrar = categorias[categoriaParam] || productosGuardados;
+
+    inicializarTienda(productosAMostrar);
+});
+
+
+// Función que retorna el precio final considerando descuento Duoc
+function calcularPrecioFinal(producto) {
+    const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
+    const tieneDescuento = usuario?.correo?.endsWith('@duoc.cl') || usuario?.descuentoDuoc || false;
+    const precioFinal = tieneDescuento ? Math.round(producto.precio * 0.8) : producto.precio;
+    return { precioFinal, tieneDescuento };
+}
+
+// Crear tarjeta de producto
+function crearTarjetaProducto(producto) {
+    const { precioFinal, tieneDescuento } = calcularPrecioFinal(producto);
+
+    return `
+        <div class="col-md-4 mb-4">
+            <a href="${producto.enlace}" class="card-link">
+                <div class="card h-100 d-flex flex-column">
+                    <img class="card-img-top padding_top rounded w-100" src="${producto.imagen}" alt="${producto.nombre}">
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title text-white">${producto.nombre}</h4>
+                        <p class="card-text text-lightgray">
+                            Codigo: ${producto.codigo} <br>
+                            Fabricante: ${producto.fabricante} <br>
+                            Distribuidor: ${producto.distribuidor}
+                        </p>
+                        <div class="mt-auto d-flex justify-content-end">
+                            <div style="background-color: #1E90FF;" class="btn btn-primary">
+                                $${precioFinal.toLocaleString('es-ES')}
+                                ${tieneDescuento ? '<small class="text-warning">(-20%)</small>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    `;
+}
+
+// Mostrar productos "Más vendidos"
+function mostrarMasVendidos() {
+    const contenedor = document.getElementById('mas-vendidos');
+    if (!contenedor) return;
+
+    const productosSeleccionados = todosLosProductos
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+
+    contenedor.innerHTML = productosSeleccionados.map(producto => {
+        const { precioFinal, tieneDescuento } = calcularPrecioFinal(producto);
+
+        return `
+            <div class="col-md-4 mb-4">
+                <a href="${producto.enlace}" class="card-link">
+                    <div class="card h-100">
+                        <img class="card-img-top padding_top rounded w-100" src="${producto.imagen}" alt="${producto.nombre}">
+                        <div class="card-body">
+                            <h4 class="card-title text-white">${producto.nombre}</h4>
+                            <p class="card-text text-lightgray">
+                                Fabricante: ${producto.fabricante} <br>
+                                Distribuidor: ${producto.distribuidor}
+                            </p>
+                            <div class="padding_top">
+                                <div style="background-color: #1E90FF;" class="btn btn-primary">
+                                    $${precioFinal.toLocaleString('es-ES')}
+                                    ${tieneDescuento ? '<small class="text-warning">(-20%)</small>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `;
+    }).join('');
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Usuarios (Admin)</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="styles/fonts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+<body style="background-color:#242729;" class="text-light">
+
+<div class="container p-5">
+  <h2 class="text-center mb-4">Gestión de Usuarios</h2>
+
+  <!-- Texto con cantidad de usuarios -->
+  <p id="cantidadUsuarios" class="text-info text-center"></p>
+
+  <!-- Lista desplegable -->
+  <div class="mb-3">
+    <label for="listaUsuarios" class="form-label">Seleccionar usuario:</label>
+    <select id="listaUsuarios" class="form-select"></select>
+  </div>
+
+  <!-- Formulario -->
+  <div class="card bg-dark text-light p-4">
+    <form id="usuarioForm">
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de usuario:</label>
+        <input type="text" class="form-control" id="username">
+      </div>
+
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo:</label>
+        <input type="email" class="form-control" id="correo" disabled>
+      </div>
+
+      <div class="mb-3">
+        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
+        <input type="date" class="form-control" id="fechaNacimiento">
+      </div>
+
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono:</label>
+        <input type="text" class="form-control" id="telefono">
+      </div>
+
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección:</label>
+        <input type="text" class="form-control" id="direccion">
+      </div>
+
+      <div class="mb-3">
+        <label for="elegirRegion" class="form-label">Región:</label>
+        <select class="form-select" id="elegirRegion" name="region">
+          <option value="">-- Seleccionar Región --</option>
+          <option value="1">Arica y Parinacota</option>
+          <option value="2">Tarapacá</option>
+          <option value="3">Antofagasta</option>
+          <option value="4">Atacama</option>
+          <option value="5">Coquimbo</option>
+          <option value="6">Valparaíso</option>
+          <option value="7">Metropolitana de Santiago</option>
+          <option value="8">O'Higgins</option>
+          <option value="9">Maule</option>
+          <option value="10">Ñuble</option>
+          <option value="11">Biobío</option>
+          <option value="12">La Araucanía</option>
+          <option value="13">Los Ríos</option>
+          <option value="14">Los Lagos</option>
+          <option value="15">Aysén</option>
+          <option value="16">Magallanes y Antártica</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="rol" class="form-label">Rol:</label>
+        <select id="rol" class="form-select">
+          <option value="usuario">Usuario</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <button type="button" id="guardarCambios" class="btn btn-primary w-100">Guardar cambios</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const listaUsuarios = document.getElementById("listaUsuarios");
+  const cantidadUsuarios = document.getElementById("cantidadUsuarios");
+
+  // Mostrar cantidad de usuarios
+  cantidadUsuarios.textContent = `Usuarios registrados: ${usuarios.length}`;
+
+  // Llenar lista desplegable
+  listaUsuarios.innerHTML = usuarios.map((u, i) =>
+    `<option value="${i}">${u.username} (${u.correo})</option>`
+  ).join("");
+
+  // Referencias a inputs
+  const username = document.getElementById("username");
+  const correo = document.getElementById("correo");
+  const fechaNacimiento = document.getElementById("fechaNacimiento");
+  const telefono = document.getElementById("telefono");
+  const direccion = document.getElementById("direccion");
+  const elegirRegion = document.getElementById("elegirRegion");
+  const rol = document.getElementById("rol");
+
+  function cargarUsuario(index) {
+    const u = usuarios[index];
+    if (!u) return;
+    username.value = u.username || "";
+    correo.value = u.correo || "";
+    fechaNacimiento.value = u.fechaNacimiento || "";
+    telefono.value = u.telefono || "";
+    direccion.value = u.direccion || "";
+    elegirRegion.value = u.region || "";
+    rol.value = u.rol || "usuario";
+  }
+
+  // Cargar el primero al inicio
+  if (usuarios.length > 0) cargarUsuario(0);
+
+  // Cambiar usuario desde lista
+  listaUsuarios.addEventListener("change", (e) => {
+    cargarUsuario(e.target.value);
+  });
+
+  // Guardar cambios
+  document.getElementById("guardarCambios").addEventListener("click", () => {
+    const index = listaUsuarios.value;
+    usuarios[index].username = username.value;
+    usuarios[index].fechaNacimiento = fechaNacimiento.value;
+    usuarios[index].telefono = telefono.value;
+    usuarios[index].direccion = direccion.value;
+    usuarios[index].region = elegirRegion.value;
+    usuarios[index].rol = rol.value;
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    alert("Cambios guardados para " + usuarios[index].username);
+
+    // refrescar lista (por si cambió nombre)
+    listaUsuarios.innerHTML = usuarios.map((u, i) =>
+      `<option value="${i}">${u.username} (${u.correo})</option>`
+    ).join("");
+    listaUsuarios.value = index;
+  });
+});
+</script>
+<script src="js/menus.js"></script>
+</body>
+</html>
