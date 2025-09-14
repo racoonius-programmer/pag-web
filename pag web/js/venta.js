@@ -3,18 +3,53 @@ function renderizarPaginaProducto(producto) {
     const contenedor = document.getElementById('product-container');
     if (!contenedor) return;
 
+    // Ver si el usuario está logeado buscando en la variable local usarioActual
+    const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActual")) || null;
+    const esDuoc = usuarioLogueado && usuarioLogueado.descuentoDuoc === true;
+
+    // Calcular descuento si es DUOC
+    let precioFinal = producto.precio;
+    let descuentoHTML = "";
+    if (esDuoc) {
+        const precioConDescuento = Math.round(producto.precio * 0.8); // 20% menos
+        descuentoHTML = `
+            <h>
+                <span class="text-decoration-line-through text-danger">$${producto.precio.toLocaleString('es-ES')}</span>
+                <span class="ms-2 text-success fw-bold">Precio DUOC: $${precioConDescuento.toLocaleString('es-ES')}</span>
+            </h>
+        `;
+        precioFinal = precioConDescuento; // 👈 Se guarda para el carrito
+    }
+    // Bloque del precio
+let precioHTML = esDuoc
+    ? `
+        <h3>
+            <span class="text-decoration-line-through text-danger">
+                $${producto.precio.toLocaleString('es-ES')}
+            </span>
+        </h3>
+        <h2>
+            <span class="ms-2 text-success fw-bold">
+            Precio DUOC: $${precioFinal.toLocaleString('es-ES')}
+            </span>
+        </h2>
+    `
+    : `<h2>$${producto.precio.toLocaleString('es-ES')}</h2>`;
+
+
     contenedor.innerHTML = `
         <div class="row">
             <div class="col-md-6">
                 <img src="${producto.imagen}" class="img-fluid rounded" alt="${producto.nombre}">
             </div>
             <div class="col-md-6 text-white">
-                <small >${producto.Marca}</small>
+                <small>${producto.Marca}</small>
                 <h1 class="mt-2">${producto.nombre}</h1>
                 <p>Código (provisional): ${producto.codigo}</p>
                 <p>Material: ${producto.Material}</p>
                 <p>${producto.Descripcion}</p>
-                <h2>$${producto.precio.toLocaleString('es-ES')}</h2>
+                
+                ${precioHTML}
 
                 <div class="d-flex my-4">
                     <div class="input-group me-3" style="width: 130px;">
@@ -22,8 +57,9 @@ function renderizarPaginaProducto(producto) {
                         <input type="text" class="form-control text-center" id="quantityInput" value="1">
                         <button class="btn btn-primary" id="increaseBtn">+</button>
                     </div>
-                    <button class="btn btn-primary flex-grow-1" id="addToCartBtn">AÑADIR</button>
+                    <button class="btn btn-primary flex-grow-1" id="addToCartBtn">AÑADIR Y VER CARRITO</button>
                 </div>
+
                 <div class="d-grid">
                     <button class="btn btn-outline-light" id="addToWishlistBtn">Añadir a la lista de deseos</button>
                 </div>
@@ -68,15 +104,32 @@ function renderizarPaginaProducto(producto) {
         if (parseInt(quantityInput.value) > 1) quantityInput.value -= 1;
     });
 
-    // Botones
+    // Botón añadir al carrito
     document.getElementById('addToCartBtn').addEventListener('click', () => {
-        alert(`¡${quantityInput.value} unidad(es) de ${producto.nombre} añadidas al carrito!`);
+        // --- Validar que el usuario este logeado antes de continuar ---
+        if (!usuarioLogueado) {
+            alert("Debes iniciar sesión para agregar productos al carrito.");
+            window.location.href = "user_inicio_sesion.html"; // redirige al login
+            return;
+        }
+
+        const cantidad = parseInt(quantityInput.value);
+        agregarAlCarrito({ ...producto, precio: precioFinal }, cantidad);
+
+        // Redirigir a carrito.html
+        window.location.href = "carrito.html";
     });
+
     document.getElementById('addToWishlistBtn').addEventListener('click', () => {
+        if (!usuarioLogueado) {
+            alert("Debes iniciar sesión para añadir productos a tu lista de deseos.");
+            window.location.href = "login.html";
+            return;
+        }
         alert(`¡${producto.nombre} añadido a la lista de deseos!`);
     });
 
-    // Comentarios simulados para testear
+    // --- Comentarios simulados ---
     const comentariosSimulados = [
         {
             usuario: "María López",
@@ -100,7 +153,6 @@ function renderizarPaginaProducto(producto) {
 
     const commentsContainer = document.getElementById('commentsContainer');
 
-    // Función para renderizar comentarios
     function renderizarComentarios() {
         commentsContainer.innerHTML = '';
         comentariosSimulados.forEach(comentario => {
@@ -120,7 +172,7 @@ function renderizarPaginaProducto(producto) {
 
     renderizarComentarios();
 
-    // Manejar envío de nuevo comentario
+    // Manejo de reseñas
     document.getElementById('commentForm').addEventListener('submit', (e) => {
         e.preventDefault();
         const score = parseInt(document.getElementById('reviewScore').value);
@@ -130,9 +182,8 @@ function renderizarPaginaProducto(producto) {
             alert("Por favor, selecciona una puntuación y escribe un comentario.");
             return;
         }
-        //Por ahora manejaremos nuestro usuario como anónimo
         comentariosSimulados.unshift({
-            usuario: "Usuario Anónimo",
+            usuario: usuarioLogueado ? usuarioLogueado.nombre : "Usuario Anónimo",
             calificacion: score,
             texto: comment,
             fecha: new Date().toLocaleDateString('es-CL')
@@ -143,3 +194,26 @@ function renderizarPaginaProducto(producto) {
         alert("¡Tu reseña ha sido enviada!");
     });
 }
+
+function agregarAlCarrito(producto, cantidad) {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Ver si ya existe el producto en el carrito
+    const index = carrito.findIndex(item => item.codigo === producto.codigo);
+    if (index !== -1) {
+        carrito[index].cantidad += cantidad;
+    } else {
+        carrito.push({
+            codigo: producto.codigo,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            imagen: producto.imagen,
+            cantidad: cantidad
+        });
+    }
+
+    // Guardar en localStorage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+

@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   ? `
                     <li><span class="dropdown-item-text">👤 ${usuarioActual.username}</span></li>
                     <li><a class="dropdown-item" href="user_perfil.html">Mi Perfil</a></li>
+                    <li><a class="dropdown-item" href="carrito.html">Mi Carrito</a></li>
                     ${
                       usuarioActual.rol === "admin"
                         ? `<li><a class="dropdown-item" href="admin_main.html">Panel de Administración</a></li>`

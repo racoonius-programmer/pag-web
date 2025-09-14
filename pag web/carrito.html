@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de Compras</title>
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+    <div class="container py-5">
+        <h1 class="mb-4">🛒 Carrito de Compras</h1>
+        <div id="carritoContainer"></div>
+        <hr>
+        <div class="d-flex justify-content-between mt-4">
+            <button class="btn btn-danger" onclick="limpiarCarrito(); mostrarCarrito();">Vaciar Carrito</button>
+            <div>
+                <a href="productos.html" class="btn btn-secondary me-2">Continuar Comprando</a>
+                <a href="pago.html" class="btn btn-verde-neon me-2">Ir a Pagar</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/carrito.js"></script>
+    <script>
+        function mostrarCarrito() {
+            const carrito = obtenerCarrito();
+            const contenedor = document.getElementById("carritoContainer");
+
+            if (carrito.length === 0) {
+                contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
+                return;
+            }
+
+            let total = 0;
+            contenedor.innerHTML = `
+                <table class="table table-dark table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${carrito.map(item => {
+                            let subtotal = item.precio * item.cantidad;
+                            total += subtotal;
+                            return `
+                                <tr>
+                                    <td>${item.nombre}</td>
+                                    <td>$${item.precio.toLocaleString('es-ES')}</td>
+                                    <td>${item.cantidad}</td>
+                                    <td>$${subtotal.toLocaleString('es-ES')}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <input type="number" id="removeQty-${item.codigo}" min="1" max="${item.cantidad}" value="1" class="form-control form-control-sm me-2" style="width:70px;">
+                                            <button class="btn btn-sm btn-danger" onclick="eliminarCantidad('${item.codigo}')">Eliminar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        }).join("")}
+                        <tr>
+                            <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                            <td colspan="2"><strong>$${total.toLocaleString('es-ES')}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function eliminarCantidad(codigo) {
+            const input = document.getElementById(`removeQty-${codigo}`);
+            const cantidadEliminar = parseInt(input.value) || 1;
+            eliminarDelCarrito(codigo, cantidadEliminar);
+            mostrarCarrito();
+        }
+
+        mostrarCarrito();
+    </script>
+    <script src="js/menus.js"></script>
+</body>
+</html>
