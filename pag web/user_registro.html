@@ -10,9 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles/fonts.css">
+  <script src="js/user_db.js"></script>
   <script src="js/menus.js"></script>
   <script src="js/form_validaciones.js" defer></script>
-  <script src="js/user_db.js"></script>
+
 </head>
 
 <body class="m-0" style="background-color: #242729;">
@@ -21,18 +22,6 @@
     <h3 class="text-light text-center fw-bold">Registro</h3>
 
     <form id="registroForm">
-      <!-- Nombre de usuario -->
-      <div class="mb-3">
-        <label for="username" class="form-label text-light">Nombre de usuario:</label>
-        <input type="text" required id="username" class="form-control" name="username" placeholder="">
-        <p class="text-white fst-italic">(El nombre de usuario debe contener al menos 3 caracteres.)</p>
-      </div>
-
-      <!-- Fecha de nacimiento -->
-      <div class="mb-3">
-        <label for="fecha" class="form-label text-light">Fecha de Nacimiento:</label>
-        <input type="date" required id="fecha" class="form-control" name="fecha" max="" placeholder="">
-      </div>
 
       <!-- Correo -->
       <div class="mb-3">
@@ -50,6 +39,19 @@
       <div class="mb-3">
         <label for="confirmar_contrasena" class="form-label text-light">Confirmar contraseña:</label>
         <input type="password" required id="confirmar_contrasena" class="form-control" name="confirmar_contrasena">
+      </div>
+
+      <!-- Nombre de usuario -->
+      <div class="mb-3">
+        <label for="username" class="form-label text-light">Nombre de usuario:</label>
+        <input type="text" required id="username" class="form-control" name="username" placeholder="">
+        <p class="text-white fst-italic">(El nombre de usuario debe contener al menos 3 caracteres.)</p>
+      </div>
+
+      <!-- Fecha de nacimiento -->
+      <div class="mb-3">
+        <label for="fecha" class="form-label text-light">Fecha de Nacimiento:</label>
+        <input type="date" required id="fecha" class="form-control" name="fecha" max="" placeholder="">
       </div>
 
       <!-- Teléfono (opcional) -->

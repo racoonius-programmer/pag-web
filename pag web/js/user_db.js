@@ -1,10 +1,7 @@
-// js/user_db.js
-// Simulación en memoria de la base de usuarios.
-// NOTA: este archivo define `userDB` en memoria (no toca localStorage).
-// Si usas un script que inicializa localStorage (simulacion-bd.js), añade la misma propiedad allí.
-
+// Base de datos simulada de usuarios
 const userDB = [
   {
+    id: 1,
     username: "admin",
     correo: "admin@ejemplo.com",
     contrasena: "admin123",
@@ -17,6 +14,7 @@ const userDB = [
     descuentoDuoc: false
   },
   {
+    id: 2,
     username: "juanito",
     correo: "juanito@duocuc.cl",
     contrasena: "juanito123",
@@ -26,9 +24,10 @@ const userDB = [
     region: 5,
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "usuario",
-    descuentoDuoc: true   // <-- usuario con correo Duoc
+    descuentoDuoc: true
   },
   {
+    id: 3,
     username: "maria",
     correo: "maria@example.com",
     contrasena: "maria123",
@@ -41,3 +40,10 @@ const userDB = [
     descuentoDuoc: false
   }
 ];
+
+// Inicializa usuarios en localStorage con id si no existen
+// Esto fue para evitar un error en el que se desincronizaba la lista de usuarios con el usuario actual
+if (!localStorage.getItem("usuarios")) {
+    const usuariosConId = userDB.map((u, i) => ({ ...u, id: i + 1 }));
+    localStorage.setItem("usuarios", JSON.stringify(usuariosConId));
+}

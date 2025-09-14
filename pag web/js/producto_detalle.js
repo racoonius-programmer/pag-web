@@ -18,10 +18,10 @@ function renderizarPaginaProducto(producto) {
                 <span class="ms-2 text-success fw-bold">Precio DUOC: $${precioConDescuento.toLocaleString('es-ES')}</span>
             </h>
         `;
-        precioFinal = precioConDescuento; // 👈 Se guarda para el carrito
+        precioFinal = precioConDescuento; // Se guarda el descuento para el carrito
     }
-    // Bloque del precio
-let precioHTML = esDuoc
+    // Bloque del precio en caso de que sea del duoc, usamos esto para que reemplaze el bloque normal
+    let precioHTML = esDuoc
     ? `
         <h3>
             <span class="text-decoration-line-through text-danger">
@@ -36,7 +36,7 @@ let precioHTML = esDuoc
     `
     : `<h2>$${producto.precio.toLocaleString('es-ES')}</h2>`;
 
-
+//html por defecto del producto-detalle
     contenedor.innerHTML = `
         <div class="row">
             <div class="col-md-6">
@@ -95,7 +95,7 @@ let precioHTML = esDuoc
         </div>
     `;
 
-    // Lógica cantidad
+    // Lógica cantidad para agregar productos
     const quantityInput = document.getElementById('quantityInput');
     document.getElementById('increaseBtn').addEventListener('click', () => {
         quantityInput.value = parseInt(quantityInput.value) + 1;
@@ -120,6 +120,7 @@ let precioHTML = esDuoc
         window.location.href = "carrito.html";
     });
 
+    // Botón añadir a la lista de deseos (simulado)
     document.getElementById('addToWishlistBtn').addEventListener('click', () => {
         if (!usuarioLogueado) {
             alert("Debes iniciar sesión para añadir productos a tu lista de deseos.");
@@ -153,6 +154,7 @@ let precioHTML = esDuoc
 
     const commentsContainer = document.getElementById('commentsContainer');
 
+    //Muestra los comentarios dinamicamente
     function renderizarComentarios() {
         commentsContainer.innerHTML = '';
         comentariosSimulados.forEach(comentario => {
@@ -198,7 +200,7 @@ let precioHTML = esDuoc
 function agregarAlCarrito(producto, cantidad) {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    // Ver si ya existe el producto en el carrito
+    // Ver si ya existe el producto en el carrito para sumar cantidades
     const index = carrito.findIndex(item => item.codigo === producto.codigo);
     if (index !== -1) {
         carrito[index].cantidad += cantidad;
