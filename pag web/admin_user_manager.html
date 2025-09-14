@@ -7,8 +7,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="styles/fonts.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body style="background-color:#242729;" class="text-light">
 
@@ -88,9 +87,26 @@
   </div>
 </div>
 
+<script src="js/user_db.js"></script> <!-- importa tu base inicial -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  // 1. Leer los usuarios guardados en localStorage
+  let usuariosLocal = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  // 2. Fusionar con los de userDB (evita duplicados por correo)
+  const correosExistentes = new Set(usuariosLocal.map(u => u.correo));
+  userDB.forEach(u => {
+    if (!correosExistentes.has(u.correo)) {
+      usuariosLocal.push(u);
+    }
+  });
+
+  // 3. Guardar de nuevo en localStorage
+  localStorage.setItem("usuarios", JSON.stringify(usuariosLocal));
+
+  // Ahora trabajamos siempre sobre usuariosLocal
+  let usuarios = usuariosLocal;
+
   const listaUsuarios = document.getElementById("listaUsuarios");
   const cantidadUsuarios = document.getElementById("cantidadUsuarios");
 
@@ -153,5 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <script src="js/menus.js"></script>
+<script src="js/form_validaciones.js"></script>
 </body>
 </html>
