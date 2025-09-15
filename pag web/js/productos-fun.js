@@ -294,32 +294,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoriaParam = urlParams.get('categoria');
 
     // Primero intentamos obtener los productos desde localStorage
-    let productosGuardados = JSON.parse(localStorage.getItem("productos"));
+    let productosGuardados = JSON.parse(localStorage.getItem("todosLosProductos"));
 
     // Si no hay productos guardados, usamos los de todosLosProductos
     if (!productosGuardados || productosGuardados.length === 0) {
         productosGuardados = [...todosLosProductos];
-        localStorage.setItem("productos", JSON.stringify(productosGuardados));
+        localStorage.setItem("todosLosProductos", JSON.stringify(productosGuardados));
     }
 
-    // Objeto con todas las categorías
+    // Objeto con todas las categorías (usando los arrays originales)
     const categorias = {
-        figuras: productosGuardados.filter(p => p.categoria === "figuras"),
-        juegos_de_mesa: productosGuardados.filter(p => p.categoria === "juegos_de_mesa"),
-        accesorios: productosGuardados.filter(p => p.categoria === "accesorios"),
-        consolas: productosGuardados.filter(p => p.categoria === "consolas"),
-        computadoras_gamer: productosGuardados.filter(p => p.categoria === "computadoras_gamer"),
-        sillas_gamer: productosGuardados.filter(p => p.categoria === "sillas_gamer"),
-        mouse: productosGuardados.filter(p => p.categoria === "mouse"),
-        mousepad: productosGuardados.filter(p => p.categoria === "mousepad"),
-        poleras_personalizadas: productosGuardados.filter(p => p.categoria === "poleras_personalizadas"),
+        figuras,
+        juegos_de_mesa,
+        accesorios,
+        consolas,
+        computadoras_gamer: pc_gamer, // 👈 renombramos para que calce con el menú
+        sillas_gamer,
+        mouse,
+        mousepad,
+        poleras_personalizadas,
         todos: productosGuardados
     };
 
     // Seleccionar productos según la categoría o mostrar todos si no existe
     const productosAMostrar = categorias[categoriaParam] || productosGuardados;
-
+    
     inicializarTienda(productosAMostrar);
+
 });
 
 
