@@ -136,19 +136,19 @@ function renderizarPaginaProducto(producto) {
             usuario: "María López",
             calificacion: 5,
             texto: "Excelente producto, muy detallado y de gran calidad.",
-            fecha: "2025-09-04"
+            fecha: "04-09-2025"
         },
         {
             usuario: "Juan Pérez",
             calificacion: 4,
             texto: "Muy buena figura, aunque el empaque llegó un poco golpeado.",
-            fecha: "2025-08-28"
+            fecha: "28-08-2025"
         },
         {
             usuario: "Carla Gutiérrez",
             calificacion: 5,
             texto: "¡Frodo se ve increíble en mi colección!",
-            fecha: "2025-09-01"
+            fecha: "01-09-2025"
         }
     ];
 
