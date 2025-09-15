@@ -195,3 +195,20 @@ document.getElementById("guardarCambios").addEventListener("click", () => {
 
     });
 }
+
+
+// Para alternar contraseñas con ojo
+document.querySelectorAll(".toggle-password").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const input = document.getElementById(icon.dataset.target);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye-fill");
+            icon.classList.add("bi-eye-slash-fill");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye-slash-fill");
+            icon.classList.add("bi-eye-fill");
+        }
+    });
+});
