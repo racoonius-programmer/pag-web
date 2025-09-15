@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 usuarioActual
                   ? `
                     <li><span class="dropdown-item-text">👤 ${usuarioActual.username}</span></li>
+                    <li><span class="dropdown-item-text">Level-Up: Nivel 1</span></li>                    
                     <li><a class="dropdown-item" href="user_perfil.html">Mi Perfil</a></li>
                     <li><a class="dropdown-item" href="carrito.html">Mi Carrito</a></li>
                     ${
