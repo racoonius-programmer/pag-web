@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const mes = hoy.getMonth() - new Date(fecha).getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < new Date(fecha).getDate())) edad--;
             if (edad < 18) return alert("Debes ser mayor de 18 años para registrarte.");
-            if (!correo.includes("@")) return alert("Debes ingresar un correo válido.");
+            if (!correo.includes("@") || !correo.includes(".")) return alert("Debes ingresar un correo válido.");  
             if (contrasena.length < 6) return alert("La contraseña debe tener al menos 6 caracteres.");
             if (contrasena !== confirmarContrasena) return alert("Las contraseñas no coinciden.");
             if (direccion.length < 5) return alert("La dirección debe tener al menos 5 caracteres.");

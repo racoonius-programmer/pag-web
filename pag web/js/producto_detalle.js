@@ -185,7 +185,7 @@ function renderizarPaginaProducto(producto) {
             return;
         }
         comentariosSimulados.unshift({
-            usuario: usuarioLogueado ? usuarioLogueado.nombre : "Usuario Anónimo",
+            usuario: usuarioLogueado ? usuarioLogueado.username : "Usuario Anónimo",
             calificacion: score,
             texto: comment,
             fecha: new Date().toLocaleDateString('es-CL')

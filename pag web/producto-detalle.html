@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del Producto</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="js/bootstrap.bundle.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="styles/productos.css">
@@ -30,6 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+<!-- Para mostrar el nombre del producto como title de la página-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productCode = urlParams.get('codigo');
+    
+        const productoSeleccionado = todosLosProductos.find(p => p.codigo === productCode);
+    
+        if (productoSeleccionado) {
+            document.title = productoSeleccionado.nombre + " - Detalle del Producto";
+            renderizarPaginaProducto(productoSeleccionado);
+        }
+    });
+    </script>
+    
+
+
     <script src="js/productos-db.js"></script> <!-- Datos de productos -->
     <script src="js/productos-fun.js"></script> <!-- Funciones para mostrar productos -->
 <script src="js/menus.js"></script>

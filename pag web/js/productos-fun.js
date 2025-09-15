@@ -289,6 +289,7 @@ function mostrarMasVendidos() {
     }).join('');
 }
 
+//Para filtrar el menú de categoria de productos
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const categoriaParam = urlParams.get('categoria');
@@ -302,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("todosLosProductos", JSON.stringify(productosGuardados));
     }
 
-    // Objeto con todas las categorías (usando los arrays originales)
+    // Objeto con todas las categorías llamando por array
     const categorias = {
         figuras,
         juegos_de_mesa,
@@ -318,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Seleccionar productos según la categoría o mostrar todos si no existe
     const productosAMostrar = categorias[categoriaParam] || productosGuardados;
-    
+
     inicializarTienda(productosAMostrar);
 
 });
