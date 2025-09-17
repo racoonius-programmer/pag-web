@@ -14,27 +14,33 @@
   <script src="js/menus.js"></script>
   <script src="js/form_validaciones.js" defer></script>
 
+
 </head>
 
 <body class="m-0" style="background-color: #242729;">
 
-  <div class="p-5 rounded container">
-    <h3 class="text-light text-center fw-bold">Registro</h3>
+  <div class="p-5 rounded container col-md-6">
+    <h3 class="text-light text-center fw-bold">Registro de Usuario</h3>
 
     <form id="registroForm">
 
       <!-- Correo -->
       <div class="mb-3">
         <label for="correo" class="form-label text-light">Correo:</label>
-        <input type="email" required id="correo" class="form-control" name="correo" placeholder="Introduzca su correo">
+        <input type="email" required id="correo" class="form-control" name="correo" placeholder="Introduzca su correo" maxlength="50">
+        <!-- Aviso correo -->
+        <div id="aviso-correo" class="mt-1 small"></div>
       </div>
+
 
       <!-- Contraseña -->
       <div class="mb-3 position-relative">
-        <label for="pwd" class="form-label text-light">Contraseña:</label>
-        <input type="password" class="form-control" id="pwd" placeholder="Introduzca una contraseña" required>
-        <i class="bi bi-eye-fill toggle-password" data-target="pwd"
-           style="position:absolute; right:10px; top:38px; cursor:pointer; color:black;"></i>
+        <label for="contrasena" class="form-label text-light">Contraseña:</label>
+        <input type="password" class="form-control" id="contrasena" placeholder="Ingrese la contraseña" required>
+        <i class="bi bi-eye-fill toggle-password" data-target="contrasena"
+          style="position:absolute; right:10px; top:38px; cursor:pointer; color:black;"></i>
+        <!-- Aviso de longitud -->
+        <div id="aviso-largo" class="mt-1 small"></div>
       </div>
 
       <!-- Confirmar contraseña -->
@@ -42,15 +48,19 @@
         <label for="confirmar_contrasena" class="form-label text-light">Confirmar Contraseña:</label>
         <input type="password" class="form-control" id="confirmar_contrasena" placeholder="Reingrese la contraseña" required>
         <i class="bi bi-eye-fill toggle-password" data-target="confirmar_contrasena"
-           style="position:absolute; right:10px; top:38px; cursor:pointer; color:black;"></i>
+          style="position:absolute; right:10px; top:38px; cursor:pointer; color:black;"></i>
+        <!-- Aviso coincidencia -->
+        <div id="aviso-contrasena" class="mt-1 small"></div>
       </div>
 
       <!-- Nombre de usuario -->
       <div class="mb-3">
         <label for="username" class="form-label text-light">Nombre de usuario:</label>
-        <input type="text" required id="username" class="form-control" name="username" placeholder="Introduzca un nombre de usuario">
-        <p class="text-white fst-italic">(El nombre de usuario debe contener al menos 3 caracteres.)</p>
+        <input type="text" required id="username" class="form-control" name="username" placeholder="Introduzca un nombre de usuario" maxlength="60">
+        <!-- Aviso dinámico -->
+        <div id="aviso-username" class="mt-1 small"></div>
       </div>
+
 
       <!-- Fecha de nacimiento -->
       <div class="mb-3">
@@ -61,48 +71,41 @@
       <!-- Teléfono (opcional) -->
       <div class="mb-3">
         <label for="telefono" class="form-label text-light">Teléfono (opcional):</label>
-        <input type="number" id="telefono" class="form-control" name="telefono" placeholder="Introduzca su número telefonico">
+        <input type="text" id="telefono" class="form-control" name="telefono" placeholder="Ej: 9 1234 5678" maxlength="12">
+        <div id="aviso-telefono" class="mt-1 small text-muted"></div>
       </div>
 
-      <!-- Región -->
-      <div class="mb-3">
-        <label for="elegirRegion" class="form-label text-light">Región:</label>
-        <select class="form-select" id="elegirRegion" name="region">
-          <option value="1">Región de Arica y Parinacota</option>
-          <option value="2">Región de Tarapacá</option>
-          <option value="3">Región de Antofagasta</option>
-          <option value="4">Región de Atacama</option>
-          <option value="5">Región de Coquimbo</option>
-          <option value="6">Región de Valparaíso</option>
-          <option value="7">Región Metropolitana de Santiago</option>
-          <option value="8">Región del Libertador General Bernardo O'Higgins</option>
-          <option value="9">Región del Maule</option>
-          <option value="10">Región de Ñuble</option>
-          <option value="11">Región del Biobío</option>
-          <option value="12">Región de La Araucanía</option>
-          <option value="13">Región de Los Ríos</option>
-          <option value="14">Región de Los Lagos</option>
-          <option value="15">Región de Aysén del General Carlos Ibáñez del Campo</option>
-          <option value="16">Región de Magallanes y de la Antártica Chilena</option>
+
+
+  <!--row para que salgan horizontal-->
+    <div class="row">
+      <!-- Selección de región -->
+      <div class="col-md-6 mb-3">
+        <label for="elegirRegion" class="form-label text-light">Región</label>
+        <select id="elegirRegion" class="form-select">
+          <option value="">Cargando regiones...</option>
         </select>
       </div>
 
-      <!-- Ciudad -->
-      <div class="mb-3">
-        <label for="ciudad" class="form-label text-light">Ciudad:</label>
-        <input type="text" required id="ciudad" class="form-control" name="ciudad" placeholder="Introduzca su ciudad">
+      <!-- Selección de comuna -->
+      <div class="col-md-6 mb-3">
+        <label for="elegirComuna" class="form-label text-light">Comuna</label>
+        <select id="elegirComuna" class="form-select" disabled>
+          <option value="">Seleccione una región primero</option>
+        </select>
       </div>
+    </div>
 
       <!-- Dirección -->
       <div class="mb-3">
         <label for="Direccion" class="form-label text-light">Dirección:</label>
-        <input type="text" required id="Direccion" class="form-control" name="direccion" placeholder="Introduzca su dirección">
+        <input type="text" required id="Direccion" class="form-control" name="direccion" placeholder="Introduzca su dirección" maxlength="80">
       </div>
 
       <!-- Código de referido -->
       <div class="mb-3">
         <label for="codigoRef" class="form-label text-light">Código referido (si posee)</label>
-        <input type="text" id="codigoRef" class="form-control" name="codigoRef" placeholder="Introduzca un código de referido">
+        <input type="text" id="codigoRef" class="form-control" name="codigoRef" placeholder="Introduzca un código de referido" maxlength="10">
       </div>
 
       <button type="submit" class="btn btn-azul-electrico w-100">Registrarme</button>

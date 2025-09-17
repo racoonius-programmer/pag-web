@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function () {
           <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Contacto</a></li>
           <li class="nav-item"><a href="sobreLEVEL-UP.html" class="nav-link px-2 text-light">¿Quiénes somos?</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sucursales</a></li>
         </ul>
         <p class="text-center text-light">© 2025 Level-Up Gamer</p>
         <div class="text-center mb-3">

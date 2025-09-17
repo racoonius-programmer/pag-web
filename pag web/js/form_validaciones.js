@@ -7,16 +7,190 @@ document.addEventListener("DOMContentLoaded", () => {
     const dd = String(hoy.getDate()).padStart(2, '0');
 
 //--------------------
-//Esto es para user_registro.html
+// Esto es para user_registro.html
 //--------------------
     const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActual"));
     const registroForm = document.getElementById("registroForm");
+    let regionSelect, comunaSelect; 
+
     if (registroForm) {
         const fechaInput = document.getElementById("fecha");
         if (fechaInput) {
-            fechaInput.max = `${yyyy}-${mm}-${dd}`;
+        // Establece el máximo para el calendario
+        fechaInput.max = `${yyyy}-${mm}-${dd}`;
+
+        // Valida mientras el usuario escribe o cambia la fecha
+        fechaInput.addEventListener("input", () => {
+            const valor = fechaInput.value;
+            if (!valor) return;
+
+            const fechaSeleccionada = new Date(valor);
+            if (fechaSeleccionada > hoy) {
+            fechaInput.value = ""; // limpia el campo si mete una futura
+            alert("No puedes ingresar una fecha futura.");
+            }
+        });
         }
 
+        // Cargar regiones y comunas desde archivo local
+        async function cargarRegiones() {
+            try {
+                const res = await fetch("json/comunas-regiones.json");
+                const data = await res.json();
+
+                const regiones = data.regiones;
+                regionSelect = document.getElementById("elegirRegion");
+                comunaSelect = document.getElementById("elegirComuna");
+
+                // Poblar regiones
+                regionSelect.innerHTML = `<option value="">Seleccione una región</option>`;
+                regiones.forEach(r => {
+                    regionSelect.innerHTML += `<option value="${r.region}">${r.region}</option>`;
+                });
+
+                // Evento: al cambiar la región
+                regionSelect.addEventListener("change", () => {
+                    const regionSeleccionada = regionSelect.value;
+                    comunaSelect.innerHTML = `<option value="">Seleccione una comuna</option>`;
+                    comunaSelect.disabled = true;
+
+                    if (regionSeleccionada !== "") {
+                        const regionData = regiones.find(r => r.region === regionSeleccionada);
+                        regionData.comunas.forEach(comuna => {
+                            comunaSelect.innerHTML += `<option value="${comuna}">${comuna}</option>`;
+                        });
+                        comunaSelect.disabled = false;
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error cargando comunas-regiones:", error);
+            }
+        }
+
+//TODAS LAS VALIDACIONES VISUALES AQUI
+
+        //Para el correo
+        const correoInput = document.getElementById("correo");
+        const avisoCorreo = document.getElementById("aviso-correo");
+
+        if (correoInput) {
+        correoInput.addEventListener("input", () => {
+            const correo = correoInput.value.trim();
+            // Expresión regular simple para validar correo
+            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (correo === "") {
+            avisoCorreo.textContent = "";
+            return;
+            }
+
+            if (regexCorreo.test(correo)) {
+            avisoCorreo.textContent = "✔ Correo válido";
+            avisoCorreo.className = "mt-1 small text-success";
+            } else {
+            avisoCorreo.textContent = "✖ Ingresa un correo válido";
+            avisoCorreo.className = "mt-1 small text-danger";
+            }
+        });
+        }
+
+
+        //Para mostrar aviso en tiempo real si las contraseñas coinciden
+        const contrasenaInput = document.getElementById("contrasena");
+        const confirmarInput = document.getElementById("confirmar_contrasena");
+        const avisoContrasena = document.getElementById("aviso-contrasena");
+        const avisoLargo = document.getElementById("aviso-largo");
+
+        if (contrasenaInput && confirmarInput) {
+        function validarContrasena() {
+            // Validar longitud mínima
+            if (contrasenaInput.value.length < 6) {
+            avisoLargo.textContent = "✖ La contraseña debe tener al menos 6 caracteres";
+            avisoLargo.className = "mt-1 small text-danger";
+            } else {
+            avisoLargo.textContent = "✔ Longitud de contraseña válida";
+            avisoLargo.className = "mt-1 small text-success";
+            }
+
+            // Validar coincidencia solo si hay algo en confirmar
+            if (confirmarInput.value === "") {
+            avisoContrasena.textContent = "";
+            return;
+            }
+
+            if (contrasenaInput.value === confirmarInput.value) {
+            avisoContrasena.textContent = "✔ Las contraseñas coinciden";
+            avisoContrasena.className = "mt-1 small text-success";
+            } else {
+            avisoContrasena.textContent = "✖ Las contraseñas no coinciden";
+            avisoContrasena.className = "mt-1 small text-danger";
+            }
+        }
+
+        contrasenaInput.addEventListener("input", validarContrasena);
+        confirmarInput.addEventListener("input", validarContrasena);
+        }
+
+        //Para validar nombre de usuario
+        const usernameInput = document.getElementById("username");
+        const avisoUsername = document.getElementById("aviso-username");
+
+        if (usernameInput) {
+        usernameInput.addEventListener("input", () => {
+            const valor = usernameInput.value.trim();
+
+            if (valor === "") {
+            avisoUsername.textContent = "";
+            return;
+            }
+
+            if (valor.length >= 3) {
+            avisoUsername.textContent = "✔ Nombre de usuario válido";
+            avisoUsername.className = "mt-1 small text-success";
+            } else {
+            avisoUsername.textContent = "✖ El nombre de usuario debe tener al menos 3 caracteres";
+            avisoUsername.className = "mt-1 small text-danger";
+            }
+        });
+        }
+
+        //Para validar la longitud del numero
+        const telefonoInput = document.getElementById("telefono");
+        const avisoTelefono = document.getElementById("aviso-telefono");
+
+        telefonoInput.addEventListener("input", () => {
+            let valor = telefonoInput.value.replace(/\D/g, ""); // solo números
+
+            // Limitar a 9 dígitos
+            valor = valor.substring(0, 9);
+
+            // Formato visual: "9 1234 5678"
+            let formatted = "";
+            if (valor.length > 0) formatted += valor.charAt(0);
+            if (valor.length > 1) formatted += " " + valor.substring(1, 5);
+            if (valor.length > 5) formatted += " " + valor.substring(5, 9);
+
+            telefonoInput.value = formatted;
+
+            // Mensaje en tiempo real
+            if (valor.length === 9) {
+                avisoTelefono.textContent = "✔ Número válido";
+                avisoTelefono.className = "mt-1 small text-success";
+            } else if (valor.length > 0) {
+                avisoTelefono.textContent = "✖ Número incompleto";
+                avisoTelefono.className = "mt-1 small text-danger";
+            } else {
+                avisoTelefono.textContent = ""; // si está vacío, no mostrar nada
+            }
+        });
+
+//FIN VALIDACIONES VISUALES
+
+        // Llamar a la función de regiones al cargar la página
+        cargarRegiones();
+
+        // Registro
         registroForm.addEventListener("submit", function (e) {
             e.preventDefault();
 
@@ -28,12 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const confirmarContrasena = document.getElementById("confirmar_contrasena").value;
             const telefono = document.getElementById("telefono").value.trim();
             const direccion = document.getElementById("Direccion").value.trim();
-            const region = document.getElementById("elegirRegion").value;
+            const region = regionSelect.value;
+            const comuna = comunaSelect.value;
 
             // Validaciones
             if (username.length < 3) return alert("El nombre de usuario debe tener al menos 3 caracteres.");
             if (!fecha) return alert("Debes ingresar tu fecha de nacimiento.");
-            //Para verificar si es mayor de edad
             let edad = hoy.getFullYear() - new Date(fecha).getFullYear();
             const mes = hoy.getMonth() - new Date(fecha).getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < new Date(fecha).getDate())) edad--;
@@ -42,18 +216,20 @@ document.addEventListener("DOMContentLoaded", () => {
             if (contrasena.length < 6) return alert("La contraseña debe tener al menos 6 caracteres.");
             if (contrasena !== confirmarContrasena) return alert("Las contraseñas no coinciden.");
             if (direccion.length < 5) return alert("La dirección debe tener al menos 5 caracteres.");
+            if (!region) return alert("Debes seleccionar una región.");
+            if (!comuna) return alert("Debes seleccionar una comuna.");
 
             const descuentoDuoc = correo.toLowerCase().includes("@duocuc.cl");
 
             // Ver usuarios existentes
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-            // Generar id incremental al registrar otro usuario
+            // Generar id incremental
             const siguienteId = usuariosGuardados.length > 0
                 ? Math.max(...usuariosGuardados.map(u => u.id || 0)) + 1
                 : 1;
 
-            //Variables del nuevo usuario
+            // Nuevo usuario
             const nuevoUsuario = {
                 id: siguienteId,
                 username,
@@ -62,24 +238,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 contrasena,
                 telefono,
                 direccion,
-                region: parseInt(region),
+                region,  // 👈 ahora se guarda como string (ej: "Región Metropolitana")
+                comuna,  // 👈 string (ej: "Puente Alto")
                 rol: "usuario",
                 descuentoDuoc,
                 fotoPerfil: "img/header/user-logo-generic-white-alt.png"
             };
 
-            // Guardar usuarios en localStorage
+            // Guardar
             usuariosGuardados.push(nuevoUsuario);
             localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-
-            // Guardar sesión
             localStorage.setItem("usuarioActual", JSON.stringify(nuevoUsuario));
 
             alert("Registro exitoso" + (descuentoDuoc ? " ¡Tienes 20% de descuento de por vida!" : ""));
             window.location.href = "main.html";
         });
     }
-
 
 //--------------------
 //Esto es para user_inicio_sesion.html

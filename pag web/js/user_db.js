@@ -8,7 +8,8 @@ const userDB = [
     fechaNacimiento: "1990-01-01",
     telefono: "123456789",
     direccion: "Av. Principal 100",
-    region: 1,
+    region: 1,  // ID de la región
+    comuna: "Santiago", // 👈 nuevo campo
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "admin",
     descuentoDuoc: false
@@ -22,6 +23,7 @@ const userDB = [
     telefono: "987654321",
     direccion: "Calle Secundaria 45",
     region: 5,
+    comuna: "Viña del Mar", // 👈 nuevo campo
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "usuario",
     descuentoDuoc: true
@@ -35,6 +37,7 @@ const userDB = [
     telefono: "555555555",
     direccion: "Av. Las Flores 12",
     region: 8,
+    comuna: "Concepción", // 👈 nuevo campo
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "usuario",
     descuentoDuoc: false
@@ -42,7 +45,6 @@ const userDB = [
 ];
 
 // Inicializa usuarios en localStorage con id si no existen
-// Esto fue para evitar un error en el que se desincronizaba la lista de usuarios con el usuario actual
 if (!localStorage.getItem("usuarios")) {
     const usuariosConId = userDB.map((u, i) => ({ ...u, id: i + 1 }));
     localStorage.setItem("usuarios", JSON.stringify(usuariosConId));
