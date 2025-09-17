@@ -1,0 +1,179 @@
+/* --- Variables --- */
+:root {
+  --bg-dark-color: #242729;
+  --card-bg-color: #2f3336;
+  --text-light-color: #e0e0e0;
+  --border-color: #4a4f52;
+  --primary-color: #0d6efd;
+}
+
+/* --- Estilos del panel de administración --- */
+.admin-panel {
+  background-color: var(--bg-dark-color);
+  color: var(--text-light-color);
+  font-family: 'Roboto', sans-serif;
+  flex: 1; /* Esto hace que ocupe el espacio restante si hay un navbar o footer */
+}
+
+.admin-panel .container-fluid {
+  height: 100v;
+  display: flex;
+  padding: 0;
+}
+
+.sidebar {
+  width: 250px;
+  color: var(--text-light-color);
+  background-color: var(--card-bg-color);
+  border-right: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .search-container {
+  margin-bottom: 20px;
+}
+
+.sidebar .user-list-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.user-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.user-list li:hover {
+  background-color: #3a3f42;
+}
+
+.user-list li.active {
+  background-color: var(--primary-color);
+}
+
+.user-list li.active .user-details h5, .user-list li.active .user-details p {
+    color: #fff;
+}
+
+.user-list img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.user-details h5 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.user-details p {
+  font-size: 0.85rem;
+  color: var(--text-light-color);
+  margin: 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.user-info-card {
+  background-color: var(--card-bg-color);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.user-info-card-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.user-info-card-header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+}
+
+.user-info-card-header h4 {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Campos de formulario */
+.form-control, .form-select {
+  background-color: #3b4044;
+  border-color: var(--border-color);
+  color: var(--text-light-color);
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #3b4044;
+  color: var(--text-light-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control:disabled {
+  background-color: #3b4044;
+  color: #e0e0e0;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.bi-eye-fill, .bi-eye-slash-fill {
+  color: var(--text-light-color) !important;
+}
+
+
+/* Regla específica para el campo de búsqueda */
+#userSearch {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+#productoSearch {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+.form-control:disabled {
+  background-color: #3b4044;
+  color: #e0e0e0;
+}
+.form-control::placeholder {
+  color: #e0e0e0; /* O el color que prefieras, en este caso, el color de texto claro */
+  opacity: 1; /* Esto es para que no se vea translúcido en algunos navegadores */
+}

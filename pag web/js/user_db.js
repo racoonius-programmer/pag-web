@@ -8,8 +8,8 @@ const userDB = [
     fechaNacimiento: "1990-01-01",
     telefono: "123456789",
     direccion: "Av. Principal 100",
-    region: 1,  // ID de la región
-    comuna: "Santiago", // 👈 nuevo campo
+    region: "Región Metropolitana de Santiago",
+    comuna: "Santiago",
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "admin",
     descuentoDuoc: false
@@ -22,8 +22,8 @@ const userDB = [
     fechaNacimiento: "2000-05-12",
     telefono: "987654321",
     direccion: "Calle Secundaria 45",
-    region: 5,
-    comuna: "Viña del Mar", // 👈 nuevo campo
+    region: "Valparaíso",
+    comuna: "Viña del Mar",
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "usuario",
     descuentoDuoc: true
@@ -36,8 +36,8 @@ const userDB = [
     fechaNacimiento: "1995-09-20",
     telefono: "555555555",
     direccion: "Av. Las Flores 12",
-    region: 8,
-    comuna: "Concepción", // 👈 nuevo campo
+    region: "Región del Biobío",
+    comuna: "Concepción",
     fotoPerfil: "img/header/user-logo-generic-white-alt.png",
     rol: "usuario",
     descuentoDuoc: false

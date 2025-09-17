@@ -1,202 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Usuarios (Admin)</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="styles/fonts.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios (Admin)</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/admin_styles.css">
+
 </head>
-<body style="background-color:#242729;" class="text-light">
+<body>
 
-<div class="container p-5">
-  <h2 class="text-center mb-4">Gestión de Usuarios</h2>
+<main class="admin-panel">
+    <div class="container-fluid">
+        <div class="sidebar d-flex flex-column">
+            <div class="sidebar-header">
+                <h4 class="text-white m-0">Usuarios</h4>
+                <button class="btn btn-sm btn-outline-primary" id="agregarUsuario">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <input type="search" id="userSearch" class="form-control" placeholder="Buscar usuario...">
+            </div>
+            
+            <div class="user-list-container">
+                <ul class="user-list" id="listaUsuarios">
+                </ul>
+            </div>
+            
+            <div class="text-center mt-auto">
+                <p id="cantidadUsuarios" class="text-info"></p>
+            </div>
+        </div>
 
-  <!-- Texto con cantidad de usuarios -->
-  <p id="cantidadUsuarios" class="text-info text-center"></p>
+        <div class="main-content">
+            <div class="user-info-card">
+                <div class="user-info-card-header">
+                    <img src="https://via.placeholder.com/150/505559/FFFFFF/?text=Usuario" alt="Foto de perfil" id="profilePic">
+                    <h4 id="userNameCard">Selecciona un usuario</h4>
+                    <p id="userEmailCard" class="text-light"></p>
+                </div>
+                
+                <form id="usuarioForm" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="username" class="form-label">Nombre de usuario:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Introduzca nombre de usuario">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="correo" class="form-label">Correo:</label>
+                        <input type="email" class="form-control" id="correo" disabled placeholder="No hay correo registrado">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="contrasena" class="form-label">Contraseña:</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="contrasena" placeholder="Introduzca contraseña">
+                            <button class="btn btn-outline-secondary" type="button" id="toggleContrasena">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
+                        <input type="date" class="form-control" id="fechaNacimiento">
+                    </div>
 
-  <!-- Lista desplegable -->
-  <div class="mb-3">
-    <label for="listaUsuarios" class="form-label">Seleccionar usuario:</label>
-    <select id="listaUsuarios" class="form-select"></select>
-  </div>
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono:</label>
+                        <input type="text" class="form-control" id="telefono" placeholder="No hay teléfono registrado">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="direccion" class="form-label">Dirección:</label>
+                        <input type="text" class="form-control" id="direccion">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="elegirRegion" class="form-label">Región:</label>
+                        <select class="form-select" id="elegirRegion" name="region">
+                            <option value="">-- Seleccionar Región --</option>
+                        </select>
+                    </div>
 
-  <!-- Formulario -->
-  <div class="card bg-dark text-light p-4">
-    <form id="usuarioForm">
-      <div class="mb-3">
-        <label for="username" class="form-label">Nombre de usuario:</label>
-        <input type="text" class="form-control" id="username">
-      </div>
+                    <div class="col-md-6">
+                        <label for="elegirComuna" class="form-label">Comuna:</label>
+                        <select class="form-select" id="elegirComuna" name="comuna" disabled>
+                            <option value="">-- Seleccionar Comuna --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="rol" class="form-label">Rol:</label>
+                        <select id="rol" class="form-select">
+                            <option value="usuario">Usuario</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
 
-      <div class="mb-3">
-        <label for="correo" class="form-label">Correo:</label>
-        <input type="email" class="form-control" id="correo" disabled>
-      </div>
-
-      <div class="mb-3 position-relative">
-        <label for="contrasena" class="form-label">Contraseña:</label>
-        <input type="password" class="form-control" id="contrasena">
-        <i class="bi bi-eye-fill" id="toggleContrasena" 
-           style="position:absolute; right:10px; top:38px; cursor:pointer; color:black;"></i>
-      </div>
-      
-
-      <div class="mb-3">
-        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
-        <input type="date" class="form-control" id="fechaNacimiento">
-      </div>
-
-      <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono:</label>
-        <input type="text" class="form-control" id="telefono" placeholder="No hay teléfono registrado">
-      </div>
-      
-
-      <div class="mb-3">
-        <label for="direccion" class="form-label">Dirección:</label>
-        <input type="text" class="form-control" id="direccion">
-      </div>
-
-      <div class="mb-3">
-        <label for="elegirRegion" class="form-label">Región:</label>
-        <select class="form-select" id="elegirRegion" name="region">
-          <option value="">-- Seleccionar Región --</option>
-          <option value="1">Arica y Parinacota</option>
-          <option value="2">Tarapacá</option>
-          <option value="3">Antofagasta</option>
-          <option value="4">Atacama</option>
-          <option value="5">Coquimbo</option>
-          <option value="6">Valparaíso</option>
-          <option value="7">Metropolitana de Santiago</option>
-          <option value="8">O'Higgins</option>
-          <option value="9">Maule</option>
-          <option value="10">Ñuble</option>
-          <option value="11">Biobío</option>
-          <option value="12">La Araucanía</option>
-          <option value="13">Los Ríos</option>
-          <option value="14">Los Lagos</option>
-          <option value="15">Aysén</option>
-          <option value="16">Magallanes y Antártica</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label for="rol" class="form-label">Rol:</label>
-        <select id="rol" class="form-select">
-          <option value="usuario">Usuario</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-
-      <button type="button" id="guardarCambios" class="btn btn-primary w-100">Guardar cambios</button>
-    </form>
-  </div>
-</div>
-
-<script src="js/user_db.js"></script> <!-- importa tu base inicial -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  // Leer los usuarios guardados en localStorage
-  let usuariosLocal = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-  const correosExistentes = new Set(usuariosLocal.map(u => u.correo));
-  userDB.forEach(u => {
-    if (!correosExistentes.has(u.correo)) {
-      usuariosLocal.push(u);
-    }
-  });
-
-  localStorage.setItem("usuarios", JSON.stringify(usuariosLocal));
-
-  // Ahora trabajamos siempre sobre usuariosLocal
-  let usuarios = usuariosLocal;
-
-  const listaUsuarios = document.getElementById("listaUsuarios");
-  const cantidadUsuarios = document.getElementById("cantidadUsuarios");
-
-  // Mostrar cantidad de usuarios
-  cantidadUsuarios.textContent = `Usuarios registrados: ${usuarios.length}`;
-
-  // Llenar lista desplegable
-  listaUsuarios.innerHTML = usuarios.map((u, i) =>
-    `<option value="${i}">${u.username} (${u.correo})</option>`
-  ).join("");
-
-
-  
-  // Referencias a inputs
-  const username = document.getElementById("username");
-  const correo = document.getElementById("correo");
-  const contrasena = document.getElementById("contrasena")
-  const fechaNacimiento = document.getElementById("fechaNacimiento");
-  const telefono = document.getElementById("telefono");
-  const direccion = document.getElementById("direccion");
-  const elegirRegion = document.getElementById("elegirRegion");
-  const rol = document.getElementById("rol");
-
-  const toggleContrasena = document.getElementById("toggleContrasena");
-  
-  toggleContrasena.addEventListener("click", () => {
-    if (contrasena.type === "password") {
-      contrasena.type = "text";
-      toggleContrasena.classList.remove("bi-eye-fill");
-      toggleContrasena.classList.add("bi-eye-slash-fill");
-    } else {
-      contrasena.type = "password";
-      toggleContrasena.classList.remove("bi-eye-slash-fill");
-      toggleContrasena.classList.add("bi-eye-fill");
-    }
-  });
-  
-
-  function cargarUsuario(index) {
-    const u = usuarios[index];
-    if (!u) return;
-    username.value = u.username || "";
-    correo.value = u.correo || "";
-    contrasena.value = u.contrasena || "";
-    fechaNacimiento.value = u.fechaNacimiento || "";
-    telefono.value = u.telefono || "";
-    direccion.value = u.direccion || "";
-    elegirRegion.value = u.region || "";
-    rol.value = u.rol || "usuario";
-  }
-
-  // Cargar el primero al inicio
-  if (usuarios.length > 0) cargarUsuario(0);
-
-  // Cambiar usuario desde lista
-  listaUsuarios.addEventListener("change", (e) => {
-    cargarUsuario(e.target.value);
-  });
-
-  // Guardar cambios
-  document.getElementById("guardarCambios").addEventListener("click", () => {
-    const index = listaUsuarios.value;
-    usuarios[index].username = username.value;
-    usuarios[index].fechaNacimiento = fechaNacimiento.value;
-    usuarios[index].telefono = telefono.value;
-    usuarios[index].direccion = direccion.value;
-    usuarios[index].region = elegirRegion.value;
-    usuarios[index].rol = rol.value;
-
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    alert("Cambios guardados para " + usuarios[index].username);
-
-    // refrescar lista (por si cambió nombre)
-    listaUsuarios.innerHTML = usuarios.map((u, i) =>
-      `<option value="${i}">${u.username} (${u.correo})</option>`
-    ).join("");
-    listaUsuarios.value = index;
-  });
-});
-</script>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="form-check form-switch mt-4">
+                            <input class="form-check-input" type="checkbox" id="descuentoDuoc">
+                            <label class="form-check-label" for="descuentoDuoc">Tiene descuento DUOC</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mt-4">
+                        <button type="button" id="guardarCambios" class="btn btn-primary w-100">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="js/user_db.js"></script>
+<script src="js/admin.js"></script> 
 <script src="js/menus.js"></script>
-<script src="js/form_validaciones.js"></script>
 </body>
 </html>

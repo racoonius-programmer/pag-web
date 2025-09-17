@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </ul>
 
             <form class="d-flex" action="main.html" method="get">
-              <input class="form-control me-2" type="text" name="q" placeholder="Introduce tu búsqueda">
+              <input class="form-control me-2" type="text" name="productoSearch" id="productoSearch" placeholder="Introduce tu búsqueda">
               <button class="btn btn-primary" type="submit">Buscar</button>
             </form>
 
