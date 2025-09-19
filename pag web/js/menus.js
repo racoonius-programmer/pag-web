@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <footer class="py-3 bg-black orbitron ">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <li class="nav-item"><a href="main.html" class="nav-link px-2 text-light">Inicio</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Contacto</a></li>
+          <li class="nav-item"><a href="contacto.html" class="nav-link px-2 text-light">Contacto</a></li>
           <li class="nav-item"><a href="sobreLEVEL-UP.html" class="nav-link px-2 text-light">¿Quiénes somos?</a></li>
         </ul>
         <p class="text-center text-light">© 2025 Level-Up Gamer</p>
