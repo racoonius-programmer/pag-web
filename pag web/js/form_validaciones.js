@@ -11,25 +11,51 @@ document.addEventListener("DOMContentLoaded", () => {
 //--------------------
     const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActual"));
     const registroForm = document.getElementById("registroForm");
-    let regionSelect, comunaSelect; 
+    let regionSelect, comunaSelect;
 
     if (registroForm) {
         const fechaInput = document.getElementById("fecha");
+        const avisoFecha = document.getElementById("aviso-fecha");
+
         if (fechaInput) {
-        // Establece el máximo para el calendario
-        fechaInput.max = `${yyyy}-${mm}-${dd}`;
+            // Establece el máximo para el calendario y valida la fecha mientras el usuario la elige
+            fechaInput.max = `${yyyy}-${mm}-${dd}`;
 
-        // Valida mientras el usuario escribe o cambia la fecha
-        fechaInput.addEventListener("input", () => {
-            const valor = fechaInput.value;
-            if (!valor) return;
+            fechaInput.addEventListener("input", () => {
+                const valor = fechaInput.value;
+                if (!valor) {
+                    avisoFecha.textContent = "";
+                    return;
+                }
 
-            const fechaSeleccionada = new Date(valor);
-            if (fechaSeleccionada > hoy) {
-            fechaInput.value = ""; // limpia el campo si mete una futura
-            alert("No puedes ingresar una fecha futura.");
-            }
-        });
+                const fechaSeleccionada = new Date(valor);
+                
+                // Calcular la edad
+                let edad = hoy.getFullYear() - fechaSeleccionada.getFullYear();
+                const mes = hoy.getMonth() - fechaSeleccionada.getMonth();
+                const dia = hoy.getDate() - fechaSeleccionada.getDate();
+
+                // Ajustar la edad si el cumpleaños no ha pasado
+                if (mes < 0 || (mes === 0 && dia < 0)) {
+                    edad--;
+                }
+
+                if (fechaSeleccionada > hoy) {
+                    fechaInput.value = ""; // limpia el campo si mete una futura
+                    avisoFecha.textContent = "✖ No puedes ingresar una fecha futura.";
+                    avisoFecha.className = "mt-1 small text-danger";
+                    alert("No puedes ingresar una fecha futura.");
+                } else if (edad < 18) {
+                    avisoFecha.textContent = "✖ Debes ser mayor de 18 años.";
+                    avisoFecha.className = "mt-1 small text-danger";
+                } else if (edad > 100) {
+                    avisoFecha.textContent = "✖ No puedes tener más de 100 años.";
+                    avisoFecha.className = "mt-1 small text-danger";
+                } else {
+                    avisoFecha.textContent = "✔ Fecha válida.";
+                    avisoFecha.className = "mt-1 small text-success";
+                }
+            });
         }
 
         // Cargar regiones y comunas desde archivo local
@@ -73,28 +99,27 @@ document.addEventListener("DOMContentLoaded", () => {
         //Para el correo
         const correoInput = document.getElementById("correo");
         const avisoCorreo = document.getElementById("aviso-correo");
+        const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
 
         if (correoInput) {
-        correoInput.addEventListener("input", () => {
-            const correo = correoInput.value.trim();
-            // Expresión regular simple para validar correo
-            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            correoInput.addEventListener("input", () => {
+                const correo = correoInput.value.trim();
+                const esCorreoValido = dominiosPermitidos.some(dominio => correo.endsWith(dominio));
 
-            if (correo === "") {
-            avisoCorreo.textContent = "";
-            return;
-            }
+                if (correo === "") {
+                    avisoCorreo.textContent = "";
+                    return;
+                }
 
-            if (regexCorreo.test(correo)) {
-            avisoCorreo.textContent = "✔ Correo válido";
-            avisoCorreo.className = "mt-1 small text-success";
-            } else {
-            avisoCorreo.textContent = "✖ Ingresa un correo válido";
-            avisoCorreo.className = "mt-1 small text-danger";
-            }
-        });
+                if (esCorreoValido) {
+                    avisoCorreo.textContent = "✔ Correo válido";
+                    avisoCorreo.className = "mt-1 small text-success";
+                } else {
+                    avisoCorreo.textContent = "✖ Ingresa un correo de los dominios: @duoc.cl, @profesor.duoc.cl o @gmail.com";
+                    avisoCorreo.className = "mt-1 small text-danger";
+                }
+            });
         }
-
 
         //Para mostrar aviso en tiempo real si las contraseñas coinciden
         const contrasenaInput = document.getElementById("contrasena");
@@ -103,33 +128,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const avisoLargo = document.getElementById("aviso-largo");
 
         if (contrasenaInput && confirmarInput) {
-        function validarContrasena() {
-            // Validar longitud mínima
-            if (contrasenaInput.value.length < 6) {
-            avisoLargo.textContent = "✖ La contraseña debe tener al menos 6 caracteres";
-            avisoLargo.className = "mt-1 small text-danger";
-            } else {
-            avisoLargo.textContent = "✔ Longitud de contraseña válida";
-            avisoLargo.className = "mt-1 small text-success";
+            function validarContrasena() {
+                // Validar longitud mínima
+                if (contrasenaInput.value.length < 4) {
+                    avisoLargo.textContent = "✖ La contraseña debe tener al menos 4 caracteres";
+                    avisoLargo.className = "mt-1 small text-danger";
+                } else {
+                    avisoLargo.textContent = "✔ Longitud de contraseña válida";
+                    avisoLargo.className = "mt-1 small text-success";
+                }
+
+                // Validar coincidencia solo si hay algo en confirmar
+                if (confirmarInput.value === "") {
+                    avisoContrasena.textContent = "";
+                    return;
+                }
+
+                if (contrasenaInput.value === confirmarInput.value) {
+                    avisoContrasena.textContent = "✔ Las contraseñas coinciden";
+                    avisoContrasena.className = "mt-1 small text-success";
+                } else {
+                    avisoContrasena.textContent = "✖ Las contraseñas no coinciden";
+                    avisoContrasena.className = "mt-1 small text-danger";
+                }
             }
 
-            // Validar coincidencia solo si hay algo en confirmar
-            if (confirmarInput.value === "") {
-            avisoContrasena.textContent = "";
-            return;
-            }
-
-            if (contrasenaInput.value === confirmarInput.value) {
-            avisoContrasena.textContent = "✔ Las contraseñas coinciden";
-            avisoContrasena.className = "mt-1 small text-success";
-            } else {
-            avisoContrasena.textContent = "✖ Las contraseñas no coinciden";
-            avisoContrasena.className = "mt-1 small text-danger";
-            }
-        }
-
-        contrasenaInput.addEventListener("input", validarContrasena);
-        confirmarInput.addEventListener("input", validarContrasena);
+            contrasenaInput.addEventListener("input", validarContrasena);
+            confirmarInput.addEventListener("input", validarContrasena);
         }
 
         //Para validar nombre de usuario
@@ -137,22 +162,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const avisoUsername = document.getElementById("aviso-username");
 
         if (usernameInput) {
-        usernameInput.addEventListener("input", () => {
-            const valor = usernameInput.value.trim();
+            usernameInput.addEventListener("input", () => {
+                const valor = usernameInput.value.trim();
 
-            if (valor === "") {
-            avisoUsername.textContent = "";
-            return;
-            }
+                if (valor === "") {
+                    avisoUsername.textContent = "";
+                    return;
+                }
 
-            if (valor.length >= 3) {
-            avisoUsername.textContent = "✔ Nombre de usuario válido";
-            avisoUsername.className = "mt-1 small text-success";
-            } else {
-            avisoUsername.textContent = "✖ El nombre de usuario debe tener al menos 3 caracteres";
-            avisoUsername.className = "mt-1 small text-danger";
-            }
-        });
+                if (valor.length >= 3) {
+                    avisoUsername.textContent = "✔ Nombre de usuario válido";
+                    avisoUsername.className = "mt-1 small text-success";
+                } else {
+                    avisoUsername.textContent = "✖ El nombre de usuario debe tener al menos 3 caracteres";
+                    avisoUsername.className = "mt-1 small text-danger";
+                }
+            });
         }
 
         //Para validar la longitud del numero
@@ -185,6 +210,29 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        // Para validar la longitud de la dirección
+        const direccionInput = document.getElementById("Direccion");
+        const avisoDireccion = document.getElementById("aviso-direccion");
+
+        if(direccionInput) {
+            direccionInput.addEventListener("input", () => {
+                const valor = direccionInput.value.trim();
+                
+                if (valor === "") {
+                    avisoDireccion.textContent = "";
+                    return;
+                }
+                
+                if (valor.length >= 5) {
+                    avisoDireccion.textContent = "✔ Dirección válida";
+                    avisoDireccion.className = "mt-1 small text-success";
+                } else {
+                    avisoDireccion.textContent = "✖ La dirección debe tener al menos 5 caracteres";
+                    avisoDireccion.className = "mt-1 small text-danger";
+                }
+            });
+        }
+
 //FIN VALIDACIONES VISUALES
 
         // Llamar a la función de regiones al cargar la página
@@ -204,6 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const direccion = document.getElementById("Direccion").value.trim();
             const region = regionSelect.value;
             const comuna = comunaSelect.value;
+            const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
+            const esCorreoValido = dominiosPermitidos.some(dominio => correo.endsWith(dominio));
+
 
             // Validaciones
             if (username.length < 3) return alert("El nombre de usuario debe tener al menos 3 caracteres.");
@@ -212,8 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const mes = hoy.getMonth() - new Date(fecha).getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < new Date(fecha).getDate())) edad--;
             if (edad < 18) return alert("Debes ser mayor de 18 años para registrarte.");
-            if (!correo.includes("@") || !correo.includes(".")) return alert("Debes ingresar un correo válido.");  
-            if (contrasena.length < 6) return alert("La contraseña debe tener al menos 6 caracteres.");
+            if (edad > 100) return alert("No puedes tener más de 100 años.");
+            if (!esCorreoValido) return alert("Debes ingresar un correo de los dominios: @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+            if (contrasena.length < 4) return alert("La contraseña debe tener al menos 4 caracteres.");
             if (contrasena !== confirmarContrasena) return alert("Las contraseñas no coinciden.");
             if (direccion.length < 5) return alert("La dirección debe tener al menos 5 caracteres.");
             if (!region) return alert("Debes seleccionar una región.");
@@ -238,8 +290,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 contrasena,
                 telefono,
                 direccion,
-                region,  // 👈 ahora se guarda como string (ej: "Región Metropolitana")
-                comuna,  // 👈 string (ej: "Puente Alto")
+                region,
+                comuna,
                 rol: "usuario",
                 descuentoDuoc,
                 fotoPerfil: "img/header/user-logo-generic-white-alt.png"
@@ -248,49 +300,89 @@ document.addEventListener("DOMContentLoaded", () => {
             // Guardar
             usuariosGuardados.push(nuevoUsuario);
             localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-            localStorage.setItem("usuarioActual", JSON.stringify(nuevoUsuario));
-
-            alert("Registro exitoso" + (descuentoDuoc ? " ¡Tienes 20% de descuento de por vida!" : ""));
-            window.location.href = "main.html";
+            
+            // Si el registro fue hecho por un admin, no guardamos el usuarioActual
+            // en el local storage ni lo redirigimos a main.html
+            if (usuarioLogueado && usuarioLogueado.rol === 'admin') {
+                alert("Usuario registrado con éxito.");
+                window.location.href = "admin_main.html"; // Redirige al panel de admin
+            } else {
+                // Si el registro lo hizo un usuario normal, se guarda la sesión
+                localStorage.setItem("usuarioActual", JSON.stringify(nuevoUsuario));
+                alert("Registro exitoso" + (descuentoDuoc ? " ¡Tienes 20% de descuento de por vida!" : ""));
+                window.location.href = "main.html"; // Redirige a la página principal
+            }
         });
     }
-
 //--------------------
 //Esto es para user_inicio_sesion.html
 //--------------------
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
+const loginForm = document.getElementById("loginForm");
+if (loginForm) {
+    // Validaciones visuales para el formulario de inicio de sesión
+    const emailInput = document.getElementById("email");
+    const avisoEmail = document.getElementById("aviso-email");
+    const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
 
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("pwd").value;
+    if (emailInput && avisoEmail) {
+        emailInput.addEventListener("input", () => {
+            const email = emailInput.value.trim();
+            const esCorreoValido = dominiosPermitidos.some(dominio => email.endsWith(dominio));
 
-            // Usuarios en localStorage
-            const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-            const usuario = usuarios.find(u => u.correo === email && u.contrasena === password);
-
-            if (!usuario) {
-                alert("Correo o contraseña incorrectos.");
+            if (email === "") {
+                avisoEmail.textContent = "";
                 return;
             }
-
-            // Guardar sesión
-            localStorage.setItem("usuarioActual", JSON.stringify(usuario));
-
-            // Redirigir según rol
-            if (usuario.rol === "admin") {
-                alert("Bienvenido administrador " + usuario.username + "!");
-                window.location.href = "admin_main.html";
+            if (esCorreoValido) {
+                avisoEmail.textContent = "✔ Correo válido";
+                avisoEmail.className = "mt-1 small text-success";
             } else {
-                alert("Inicio de sesión exitoso. ¡Hola, " + usuario.username + "!");
-                window.location.href = "main.html";
+                avisoEmail.textContent = "✖ El correo debe ser de los dominios: @duoc.cl, @profesor.duoc.cl o @gmail.com";
+                avisoEmail.className = "mt-1 small text-danger";
             }
-
         });
     }
-});
 
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("pwd").value;
+        const esCorreoValido = dominiosPermitidos.some(dominio => email.endsWith(dominio));
+
+        // Validaciones del formulario de inicio de sesión
+        if (!esCorreoValido) {
+            alert("El correo debe ser de los dominios: @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+            return;
+        }
+
+        if (password.length > 10) {
+            alert("La contraseña no puede tener más de 10 caracteres.");
+            return;
+        }
+
+        // Usuarios en localStorage
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        const usuario = usuarios.find(u => u.correo === email && u.contrasena === password);
+
+        if (!usuario) {
+            alert("Correo o contraseña incorrectos.");
+            return;
+        }
+
+        // Guardar sesión
+        localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+
+        // Redirigir según rol
+        if (usuario.rol === "admin") {
+            alert("Bienvenido administrador " + usuario.username + "!");
+            window.location.href = "admin_main.html";
+        } else {
+            alert("Inicio de sesión exitoso. ¡Hola, " + usuario.username + "!");
+            window.location.href = "main.html";
+        }
+    });
+}
 
 //--------------------
 //Esto es para user_perfil.html
@@ -322,7 +414,7 @@ if (perfilForm) {
         telefonoInput.value = usuario.telefono || "";
         direccionInput.value = usuario.direccion || "";
         fotoUrlInput.value = usuario.fotoPerfil || "";
-        regionSelect.value = String(usuario.region || "1"); // 👈 convierte a string
+        regionSelect.value = String(usuario.region || "1");
 
         if (usuario.fotoPerfil) {
             fotoPerfilImg.src = usuario.fotoPerfil;
@@ -385,4 +477,5 @@ document.querySelectorAll(".toggle-password").forEach(icon => {
             icon.classList.add("bi-eye-fill");
         }
     });
+});
 });

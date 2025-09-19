@@ -3,7 +3,7 @@ const userDB = [
   {
     id: 1,
     username: "admin",
-    correo: "admin@ejemplo.com",
+    correo: "admin@gmail.com",
     contrasena: "admin123",
     fechaNacimiento: "1990-01-01",
     telefono: "123456789",
@@ -17,7 +17,7 @@ const userDB = [
   {
     id: 2,
     username: "juanito",
-    correo: "juanito@duocuc.cl",
+    correo: "juanito@duoc.cl",
     contrasena: "juanito123",
     fechaNacimiento: "2000-05-12",
     telefono: "987654321",
@@ -31,7 +31,7 @@ const userDB = [
   {
     id: 3,
     username: "maria",
-    correo: "maria@example.com",
+    correo: "maria@gmail.com",
     contrasena: "maria123",
     fechaNacimiento: "1995-09-20",
     telefono: "555555555",

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,118 +8,144 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="styles/admin_styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 </head>
+
 <body>
 
-<main class="admin-panel">
-    <div class="container-fluid">
-        <div class="sidebar d-flex flex-column">
-            <div class="sidebar-header">
-                <h4 class="text-white m-0">Usuarios</h4>
-                <button class="btn btn-sm btn-outline-primary" id="agregarUsuario">
-                    <i class="bi bi-plus-lg"></i>
-                </button>
-            </div>
-            
-            <div class="search-container">
-                <input type="search" id="userSearch" class="form-control" placeholder="Buscar usuario...">
-            </div>
-            
-            <div class="user-list-container">
-                <ul class="user-list" id="listaUsuarios">
-                </ul>
-            </div>
-            
-            <div class="text-center mt-auto">
-                <p id="cantidadUsuarios" class="text-info"></p>
-            </div>
-        </div>
-
-        <div class="main-content">
-            <div class="user-info-card">
-                <div class="user-info-card-header">
-                    <img src="https://via.placeholder.com/150/505559/FFFFFF/?text=Usuario" alt="Foto de perfil" id="profilePic">
-                    <h4 id="userNameCard">Selecciona un usuario</h4>
-                    <p id="userEmailCard" class="text-light"></p>
+    <main class="admin-panel" data-bs-theme="dark">
+        <div class="container-fluid">
+            <div class="sidebar d-flex flex-column">
+                <div class="sidebar-header">
+                    <button class="btn btn-sm btn-outline-secondary" id="returnToAdmin">
+                        <i class="bi bi-arrow-left"></i> Regresar
+                    </button>
+                    <h4 class="text-white m-0">Usuarios</h4>
+                    <a href="user_registro.html" class="btn btn-sm btn-outline-primary" id="agregarUsuario">
+                        Registrar usuario
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                    </button>
                 </div>
-                
-                <form id="usuarioForm" class="row g-3">
-                    <div class="col-md-6">
-                        <label for="username" class="form-label">Nombre de usuario:</label>
-                        <input type="text" class="form-control" id="username" placeholder="Introduzca nombre de usuario">
+
+                <div class="search-container">
+                    <input type="search" id="userSearch" class="form-control" placeholder="Buscar usuario...">
+                </div>
+
+                <div class="table-responsive user-list-container">
+                    <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Rol</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaUsuarios">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center mt-auto">
+                    <p id="cantidadUsuarios" class="text-info"></p>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="user-info-card">
+                    <div class="user-info-card-header">
+                        <img src="https://via.placeholder.com/150/505559/FFFFFF/?text=Usuario" alt="Foto de perfil"
+                            id="profilePic">
+                        <h4 id="userNameCard">Selecciona un usuario</h4>
+                        <p id="userEmailCard" class="text-light"></p>
                     </div>
-                    <div class="col-md-6">
-                        <label for="correo" class="form-label">Correo:</label>
-                        <input type="email" class="form-control" id="correo" disabled placeholder="No hay correo registrado">
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <label for="contrasena" class="form-label">Contraseña:</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="contrasena" placeholder="Introduzca contraseña">
-                            <button class="btn btn-outline-secondary" type="button" id="toggleContrasena">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
+
+                    <form id="usuarioForm" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="username" class="form-label">Nombre de usuario:</label>
+                            <input type="text" class="form-control" id="username"
+                                placeholder="Introduzca nombre de usuario">
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
-                        <input type="date" class="form-control" id="fechaNacimiento">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="telefono" class="form-label">Teléfono:</label>
-                        <input type="text" class="form-control" id="telefono" placeholder="No hay teléfono registrado">
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <label for="direccion" class="form-label">Dirección:</label>
-                        <input type="text" class="form-control" id="direccion">
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <label for="elegirRegion" class="form-label">Región:</label>
-                        <select class="form-select" id="elegirRegion" name="region">
-                            <option value="">-- Seleccionar Región --</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="elegirComuna" class="form-label">Comuna:</label>
-                        <select class="form-select" id="elegirComuna" name="comuna" disabled>
-                            <option value="">-- Seleccionar Comuna --</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <label for="rol" class="form-label">Rol:</label>
-                        <select id="rol" class="form-select">
-                            <option value="usuario">Usuario</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 d-flex align-items-center">
-                        <div class="form-check form-switch mt-4">
-                            <input class="form-check-input" type="checkbox" id="descuentoDuoc">
-                            <label class="form-check-label" for="descuentoDuoc">Tiene descuento DUOC</label>
+                        <div class="col-md-6">
+                            <label for="correo" class="form-label">Correo:</label>
+                            <input type="email" class="form-control" id="correo" disabled
+                                placeholder="No hay correo registrado">
                         </div>
-                    </div>
-                    
-                    <div class="col-12 mt-4">
-                        <button type="button" id="guardarCambios" class="btn btn-primary w-100">Guardar cambios</button>
-                    </div>
+
+                        <div class="col-md-6">
+                            <label for="contrasena" class="form-label">Contraseña:</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="contrasena"
+                                    placeholder="Introduzca contraseña">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleContrasena">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
+                            <input type="date" class="form-control" id="fechaNacimiento">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="telefono" class="form-label">Teléfono:</label>
+                            <input type="text" class="form-control" id="telefono"
+                                placeholder="No hay teléfono registrado">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="direccion" class="form-label">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" placeholder="Ingrese una dirección">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="elegirRegion" class="form-label">Región:</label>
+                            <select class="form-select" id="elegirRegion" name="region">
+                                <option value="">-- Seleccionar Región --</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="elegirComuna" class="form-label">Comuna:</label>
+                            <select class="form-select" id="elegirComuna" name="comuna" disabled>
+                                <option value="">-- Seleccionar Comuna --</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="rol" class="form-label">Rol:</label>
+                            <select id="rol" class="form-select">
+                                <option value="usuario">Usuario</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <!--Descuento Duoc activado o desactivado-->
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="form-check form-switch mt-4">
+                                <input class="form-check-input" type="checkbox" id="descuentoDuoc">
+                                <label class="form-check-label" for="descuentoDuoc">Tiene descuento DUOC</label>
+                            </div>
+                        </div>
+                        <!--Botones-->
+                        <div class="col-12 mt-4 d-flex justify-content-center">
+                            <button type="button" id="eliminarUsuario" class="btn btn-danger me-3">Eliminar
+                                usuario</button>
+                            <button type="button" id="guardarCambios" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                </div>
                 </form>
             </div>
         </div>
-    </div>
-</main>
-<script src="js/user_db.js"></script>
-<script src="js/admin.js"></script> 
-<script src="js/menus.js"></script>
+        </div>
+    </main>
+    <script src="js/user_db.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/menus.js"></script>
 </body>
+
 </html>
