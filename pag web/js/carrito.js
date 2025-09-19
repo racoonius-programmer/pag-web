@@ -1,3 +1,4 @@
+//JS PARA GUARDAR Y LLAMAR AL CARRITO COMO VARIABLE LOCAL
 function obtenerCarrito() {
     return JSON.parse(localStorage.getItem("carrito")) || [];
 }

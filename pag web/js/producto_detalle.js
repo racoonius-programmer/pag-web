@@ -210,6 +210,8 @@ function agregarAlCarrito(producto, cantidad) {
             nombre: producto.nombre,
             precio: producto.precio,
             imagen: producto.imagen,
+            Descripcion: producto.Descripcion, // Agregado
+            Material: producto.Material,     // Agregado
             cantidad: cantidad
         });
     }
@@ -217,5 +219,3 @@ function agregarAlCarrito(producto, cantidad) {
     // Guardar en localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
-
-

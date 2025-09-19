@@ -1,89 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Carrito de Compras</title>
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles/fonts.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@400;700&display=swap"
-    rel="stylesheet">
+    <style>
+        .product-card {
+            background-color: #343a40;
+            /* Darker card background */
+            border: 1px solid #495057;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .summary-box {
+            background-color: #212529;
+            border: 1px solid #495057;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .btn-verde-neon {
+            background-color: #39ff14;
+            color: black;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-verde-neon:hover {
+            background-color: #2be80e;
+        }
+    </style>
 </head>
+
 <body class="bg-dark text-white">
+
     <div class="container py-5">
         <h1 class="mb-4">🛒 Carrito de Compras</h1>
-        <div id="carritoContainer"></div>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="carritoContainer"></div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="summary-box">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h4 class="mb-0">TOTAL:</h4>
+                        <h4 class="mb-0" id="totalGeneral"></h4>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cupon" class="form-label">Ingrese el cupón de descuento</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cupon" maxlength="10" placeholder="Cupón">
+                            <button class="btn btn-secondary">APLICAR</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-verde-neon w-100" id="btnPagar">PAGAR</button>
+                </div>
+            </div>
+        </div>
+
         <hr>
         <div class="d-flex justify-content-between mt-4">
             <button class="btn btn-danger" onclick="limpiarCarrito(); mostrarCarrito();">Vaciar Carrito</button>
-            <div>
-                <a href="productos.html" class="btn btn-secondary me-2">Continuar Comprando</a>
-                <a href="pago.html" class="btn btn-verde-neon me-2">Ir a Pagar</a>
-            </div>
+            <a href="productos.html" class="btn btn-secondary">Continuar Comprando</a>
         </div>
     </div>
 
-    <script src="js/carrito.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
     <script>
+        // Funciones del carrito
+        function obtenerCarrito() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            return carrito;
+        }
+
+        function guardarCarrito(carrito) {
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }
+
+        function agregarProductoAlCarrito(producto, cantidad) {
+            let carrito = obtenerCarrito();
+            const productoExistente = carrito.find(item => item.codigo === producto.codigo);
+
+            if (productoExistente) {
+                productoExistente.cantidad += cantidad;
+            } else {
+                carrito.push({ ...producto, cantidad });
+            }
+
+            guardarCarrito(carrito);
+        }
+
+        function eliminarDelCarrito(codigo, cantidadEliminar = 1) {
+            let carrito = obtenerCarrito();
+            const productoExistente = carrito.find(item => item.codigo === codigo);
+
+            if (productoExistente) {
+                productoExistente.cantidad -= cantidadEliminar;
+                if (productoExistente.cantidad <= 0) {
+                    carrito = carrito.filter(item => item.codigo !== codigo);
+                }
+                guardarCarrito(carrito);
+            }
+        }
+
+        function limpiarCarrito() {
+            localStorage.removeItem('carrito');
+        }
+
+        // Lógica para mostrar el carrito
         function mostrarCarrito() {
             const carrito = obtenerCarrito();
             const contenedor = document.getElementById("carritoContainer");
+            const totalElemento = document.getElementById("totalGeneral");
 
             if (carrito.length === 0) {
                 contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
+                totalElemento.textContent = "$0";
                 return;
             }
+            document.getElementById('btnPagar').addEventListener('click', () => {
+                const carrito = obtenerCarrito();
+                if (carrito.length > 0) {
+                    window.location.href = "pago.html";
+                } else {
+                    alert("Tu carrito está vacío.");
+                }
+            });
 
             let total = 0;
-            contenedor.innerHTML = `
-                <table class="table table-dark table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${carrito.map(item => {
-                            let subtotal = item.precio * item.cantidad;
-                            total += subtotal;
-                            return `
-                                <tr>
-                                    <td>${item.nombre}</td>
-                                    <td>$${item.precio.toLocaleString('es-ES')}</td>
-                                    <td>${item.cantidad}</td>
-                                    <td>$${subtotal.toLocaleString('es-ES')}</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <input type="number" id="removeQty-${item.codigo}" min="1" max="${item.cantidad}" value="1" class="form-control form-control-sm me-2" style="width:70px;">
-                                            <button class="btn btn-sm btn-danger" onclick="eliminarCantidad('${item.codigo}')">Eliminar</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            `;
-                        }).join("")}
-                        <tr>
-                            <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                            <td colspan="2"><strong>$${total.toLocaleString('es-ES')}</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
+            contenedor.innerHTML = carrito.map(item => {
+                let subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                return `
+                    <div class="product-card">
+                        <img src="${item.imagen}" alt="${item.nombre}" class="product-image">
+                        <div class="flex-shrink-1">
+                            <h5>${item.nombre}</h5>
+                            <p class="text-light">${item.Descripcion}</p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center me-4">
+                            <span>$${item.precio.toLocaleString('es-ES')}</span>
+                            <div class="quantity-control mt-2">
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarrito('${item.codigo}'); mostrarCarrito();">-</button>
+                                <input type="text" style="user-select: none;" class="form-control form-control-sm" value="${item.cantidad}" readonly>
+                                <button class="btn btn-sm btn-outline-success" onclick="agregarProductoAlCarrito({codigo: '${item.codigo}', nombre: '${item.nombre}', precio: ${item.precio}, Descripcion: '${item.Descripcion}', imagen: '${item.imagen}'}, 1); mostrarCarrito();">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            totalElemento.textContent = `$${total.toLocaleString('es-ES')}`;
         }
 
-        function eliminarCantidad(codigo) {
-            const input = document.getElementById(`removeQty-${codigo}`);
-            const cantidadEliminar = parseInt(input.value) || 1;
-            eliminarDelCarrito(codigo, cantidadEliminar);
+        document.addEventListener('DOMContentLoaded', () => {
             mostrarCarrito();
-        }
-
-        mostrarCarrito();
+        });
     </script>
     <script src="js/menus.js"></script>
 </body>
+
 </html>
