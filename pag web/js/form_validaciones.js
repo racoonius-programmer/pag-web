@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const yyyy = hoy.getFullYear();
     const mm = String(hoy.getMonth() + 1).padStart(2, '0');
     const dd = String(hoy.getDate()).padStart(2, '0');
+    /*
+        Calcula la fecha de hoy para usarla en validaciones de edad y fechas.
+        Se asegura de que todo el código se ejecute cuando el documento esté listo.
+    */ 
+
 
     //--------------------
     // Esto es para user_registro.html
@@ -29,6 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 const fechaSeleccionada = new Date(valor);
+                
+
+                /* 
+                **Validación de fecha de nacimiento**
+                Establece que no se puede ingresar una fecha futura.
+                Calcula edad → debe ser entre 18 y 100 años.
+                Muestra mensajes visuales.
+                */
+                
                 
                 // Calcular la edad
                 let edad = hoy.getFullYear() - fechaSeleccionada.getFullYear();
@@ -60,6 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Cargar regiones y comunas desde archivo local
         async function cargarRegiones() {
+            /*
+                Descarga un archivo JSON con regiones y comunas.
+                Llena el <select> de regiones.
+                Al elegir una región → carga sus comunas.
+            */
             try {
                 const res = await fetch("json/comunas-regiones.json");
                 const data = await res.json();
@@ -101,6 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const avisoCorreo = document.getElementById("aviso-correo");
         const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
 
+        /* 
+            Solo permite @duoc.cl, @profesor.duoc.cl o @gmail.com.
+            Muestra mensajes en tiempo real .
+        */
         if (correoInput) {
             correoInput.addEventListener("input", () => {
                 const correo = correoInput.value.trim();

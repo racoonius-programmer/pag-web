@@ -1,20 +1,42 @@
+    
+        /*Todo el código se ejecuta cuando el HTML ya está cargado.
+        Evita errores por intentar manipular elementos que aún no existen en la página.
+        */
 document.addEventListener("DOMContentLoaded", () => {
     let productos = JSON.parse(localStorage.getItem("todosLosProductos"));
     if (!productos || productos.length === 0) {
         productos = [...todosLosProductos];
         localStorage.setItem("todosLosProductos", JSON.stringify(productos));
+        /*
+        CARGAR PRODUCTOS DESDE LA LOCAL STORAGE
+        Busca si ya hay productos guardados en localStorage.
+        Si no hay, usa una lista inicial todosLosProductos (predefinida en otro archivo) y la guarda.
+👉      Esto garantiza que siempre haya productos disponibles al iniciar.
+        */
     }
 
     // Lógica para el botón de regreso
     document.getElementById("returnToAdmin").addEventListener("click", () => {
         window.location.href = "admin_main.html";
+        // Si el admin presiona el botón de regreso, lo lleva al panel principal.
     });
+
+
+    // Referencia a elementos HTML
 
     const listaProductos = document.getElementById("listaProductos");
     const cantidadProductos = document.getElementById("cantidadProductos");
     const previewPlaceholder = document.getElementById("previewPlaceholder");
     let productoSeleccionadoIndex = -1;
+    /*
+    Guarda referencias a:
+            La tabla/lista de productos.
+            El contador de productos registrados.
+            El placeholder de la imagen.
+            productoSeleccionadoIndex indica qué producto está seleccionado actualmente (-1 = ninguno).
+    */
 
+    // Luego hay referencias a todos los campos del formulario (código, nombre, precio, stock, etc.).
     const codigo = document.getElementById("codigo");
     const nombre = document.getElementById("nombre");
     const Descripcion = document.getElementById("Descripcion");
@@ -29,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const imagen = document.getElementById("imagen");
     const previewImagen = document.getElementById("previewImagen");
 
+
     // Función para verificar el stock crítico y mostrar la alerta
     function verificarStockCritico(p) {
         stockCriticoAlert.textContent = "";
@@ -38,12 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
             stockCriticoAlert.textContent = "¡ALERTA! Stock crítico.";
             stockCriticoAlert.classList.add("text-warning");
         }
+        /* 
+            Si el stock actual ≤ stock crítico, aparece una alerta amarilla.
+            Ayuda al admin a detectar cuándo un producto está a punto de agotarse
+        */
     }
 
+    // muestra cuántos productos hay en total.
     function actualizarCantidad() {
         cantidadProductos.textContent = `Productos registrados: ${productos.length}`;
     }
 
+
+    // redibuja la tabla de productos (código + nombre).
     function refrescarLista() {
         listaProductos.innerHTML = productos.map((p, i) =>
             `<tr data-index="${i}">
@@ -54,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         actualizarCantidad();
     }
 
+    // carga en el formulario todos los datos de un producto seleccionado.
     function cargarProducto(index) {
         const p = productos[index];
         if (!p) return;
@@ -81,11 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
         verificarStockCritico(p);
     }
 
+    // Cada cambio se guarda en localStorage, asegurando que los datos no se pierdan al recargar la página
     function guardarProductos() {
         localStorage.setItem("todosLosProductos", JSON.stringify(productos));
     }
 
     // Evento para el campo de imagen
+    // si escribes una URL, muestra la vista previa.
     imagen.addEventListener("input", () => {
         previewImagen.src = imagen.value;
         if (imagen.value) {
@@ -98,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Evento para el campo de stock
+    // actualiza el valor y verifica si está en nivel crítico
     stock.addEventListener("input", () => {
         const p = productos[productoSeleccionadoIndex];
         if (p) {
@@ -107,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Evento para el campo de stock crítico
+    // ajusta el límite de alerta
     stockCritico.addEventListener("input", () => {
         const p = productos[productoSeleccionadoIndex];
         if (p) {
@@ -115,12 +150,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    
+    
+    /* 
+        BOTON DE GUARDAR CAMBIOS
+    */
+        // Revisa que haya un producto seleccionado.
     document.getElementById("guardarCambios").addEventListener("click", () => {
         if (productoSeleccionadoIndex === -1) {
             alert("Selecciona un producto para guardar cambios.");
             return;
         }
 
+        // Valida que el stock sea un número ≥ 0.
         const index = productoSeleccionadoIndex;
         if (productos[index]) {
             // Validaciones
@@ -129,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            // Actualiza todos los valores del producto.
             // Guardar valores
             productos[index].nombre = nombre.value;
             productos[index].Descripcion = Descripcion.value;
@@ -141,13 +184,23 @@ document.addEventListener("DOMContentLoaded", () => {
             productos[index].Material = Material.value;
             productos[index].imagen = imagen.value;
             
+            // Guarda en localStorage.
             guardarProductos();
             alert("Cambios guardados en producto: " + productos[index].nombre);
+
+            // Refresca lista y mantiene seleccionado el producto
             refrescarLista();
             seleccionarFila(index);
         }
     });
 
+
+    /*
+        BOTON DE AGREGAR NUEVO PRODUCTO
+        Crea un producto nuevo con valores vacíos o por defecto.
+        Le asigna un código "NEW" + número.
+        Lo guarda en la lista y lo selecciona para edición inmediata.
+    */
     document.getElementById("agregarNuevo").addEventListener("click", () => {
         const nuevo = {
             codigo: "NEW" + (productos.length + 1),
@@ -171,6 +224,12 @@ document.addEventListener("DOMContentLoaded", () => {
         seleccionarFila(nuevoIndex);
     });
 
+    /* 
+        BOTON DE ELIMINAR PRODUCTO
+
+        Pide confirmación antes de eliminar.
+        Si se borra, refresca la lista y muestra el primer producto (o limpia el formulario si no quedan).
+    */
     document.getElementById("eliminarProducto").addEventListener("click", () => {
         if (productoSeleccionadoIndex === -1) {
             alert("Selecciona un producto para eliminar.");
@@ -194,6 +253,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Lógica para seleccionar filas
+    /*
+        Cuando haces clic en un producto de la lista, lo marca como activo (.active-row).
+        Carga sus datos en el formulario.
+    */
     function seleccionarFila(index) {
         if (listaProductos.children.length > 0) {
             for (let i = 0; i < listaProductos.children.length; i++) {
@@ -215,7 +278,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+
     // Inicialización
+
+    /* 
+        Dibuja la tabla de productos.
+        Si hay productos, selecciona el primero automáticamente.
+    */
     refrescarLista();
     if (productos.length > 0) {
         cargarProducto(0);

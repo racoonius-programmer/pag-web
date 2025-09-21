@@ -1,5 +1,12 @@
 //Base de datos simulada de productos
 
+/*
+productos-db.js es una “base de datos simulada” en el front-end.
+Cada producto es un objeto con todos los datos necesarios para mostrarse en la tienda.
+Las categorías se mantienen separadas para organizar mejor los productos.
+todosLosProductos combina todas las categorías para facilitar búsquedas y renderizado global.
+*/
+
 //Creamos cada una de las variables para separarlos por categorias
 const figuras = [
     {

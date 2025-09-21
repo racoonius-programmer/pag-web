@@ -2,8 +2,12 @@
 
 //Para generar el header en todas las páginas
 document.addEventListener('DOMContentLoaded', function () {
+  // Espera a que la página cargue.
+
+  //Espera a que la página cargue.
   const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
 
+  // Construye un bloque HTML completo para el menú de navegación.  
   const navbarHTML = `
       <nav style="width: 100%; height: 100%;" class="navbar navbar-expand-sm navbar-dark bg-black">
         <div class="container-fluid">
@@ -73,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       </nav>
     `;
-
+  
+    // Lo inserta al inicio del body de cada página
   document.body.insertAdjacentHTML('afterbegin', navbarHTML);
 
   // Funcionalidad cerrar sesión
@@ -112,5 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
       </footer>
     `;
 
+    // lo inserta al final de la pagina
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 });

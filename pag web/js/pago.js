@@ -1,8 +1,11 @@
 //JS PARA CALCULAR LOS PUNTOS Y LLAMAR AL CARRITO LOCAL
 function mostrarResumenPago() {
+
+    // Obtiene el carrito desde localStorage.
     const carrito = obtenerCarrito();
     const contenedor = document.getElementById("resumenPago");
 
+    // Si está vacío → muestra un mensaje.
     if (carrito.length === 0) {
         contenedor.innerHTML = "<p>Tu carrito está vacío, no puedes pagar.</p>";
         return;
@@ -13,7 +16,8 @@ function mostrarResumenPago() {
         total += item.precio * item.cantidad;
     });
 
-    // Calcular puntos
+    // Calcula el total y los puntos que ganará el usuario:
+        // Regla: $100 = 1 punto, cada punto vale $10.
     const puntos = Math.floor(total / 100); // 100 pesos = 1 punto
     const valorPuntos = puntos * 10; // cada punto = $10 (equivalente al 10%)
 
@@ -24,18 +28,26 @@ function mostrarResumenPago() {
     `;
 }
 
+
 function procesarPago() {
+
+    // obtiene el carrito
     const carrito = obtenerCarrito();
 
+    // valida si está vacio 
     if (carrito.length === 0) {
         alert("Tu carrito está vacío.");
         return;
     }
 
+    // calcula el total
     let total = 0;
     carrito.forEach(item => total += item.precio * item.cantidad);
 
     const puntosGanados = Math.floor(total / 100);
+
+
+    // ** Suma los puntos ganados al total acumulado en localStorage. ** 
 
     // Obtener puntos actuales
     let puntosActuales = parseInt(localStorage.getItem("puntosLevelUp")) || 0;
@@ -47,11 +59,13 @@ function procesarPago() {
     // Vaciar carrito
     limpiarCarrito();
 
+    // manda un mensaje de confirmacion 
     alert(`✅ Pago realizado con éxito.\nGanaste ${puntosGanados} puntos.\nAhora tienes un total de ${puntosActuales} puntos Level Up.`);
     window.location.href = "productos.html"; // redirige de nuevo a productos
 }
 
-mostrarResumenPago();
+mostrarResumenPago(); // así siempre ves el resumen antes de pagar
+
 function procesarPago() {
 
      // Obtener los datos del usuario activo desde el localStorage

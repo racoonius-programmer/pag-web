@@ -1,5 +1,10 @@
 //Genera automaticamente la producto-detalles.html sacando los datos del producto
 function renderizarPaginaProducto(producto) {
+    /*
+        Esta función recibe un objeto producto con todos los datos (nombre, precio, imagen, descripción, etc.). 
+        Busca el contenedor en el HTML donde se mostrará la página del producto.
+        Si el contenedor no existe, termina la función (return). Esto evita errores si la página no tiene el div product-container.
+    */
     const contenedor = document.getElementById('product-container');
     if (!contenedor) return;
 
@@ -20,6 +25,7 @@ function renderizarPaginaProducto(producto) {
         `;
         precioFinal = precioConDescuento; // Se guarda el descuento para el carrito
     }
+
     // Bloque del precio en caso de que sea del duoc, usamos esto para que reemplaze el bloque normal
     let precioHTML = esDuoc
     ? `
@@ -96,6 +102,11 @@ function renderizarPaginaProducto(producto) {
     `;
 
     // Lógica cantidad para agregar productos
+
+    /*  
+        Permite que el usuario aumente o disminuya la cantidad antes de agregar al carrito.
+        Nunca deja que la cantidad baje de 1.
+    */
     const quantityInput = document.getElementById('quantityInput');
     document.getElementById('increaseBtn').addEventListener('click', () => {
         quantityInput.value = parseInt(quantityInput.value) + 1;
@@ -118,6 +129,12 @@ function renderizarPaginaProducto(producto) {
 
         // Redirigir a carrito.html
         window.location.href = "carrito.html";
+
+        /* 
+        Valida que el usuario esté logueado.
+        Llama a agregarAlCarrito con el producto y la cantidad.
+        Redirige al usuario a carrito.html.
+        */
     });
 
     // Botón añadir a la lista de deseos (simulado)
@@ -170,13 +187,20 @@ function renderizarPaginaProducto(producto) {
             `;
             commentsContainer.innerHTML += commentHtml;
         });
+
+        /* 
+        Muestra comentarios simulados de clientes con estrellas y fecha.
+        */
+
     }
 
-    renderizarComentarios();
+    renderizarComentarios(); //  Cada vez que se agrega un nuevo comentario, se llama a renderizarComentarios() para actualizar la vista.
 
     // Manejo de reseñas
     document.getElementById('commentForm').addEventListener('submit', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Evita que la página se recargue
+
+        // Valida que haya puntuación y comentario
         const score = parseInt(document.getElementById('reviewScore').value);
         const comment = document.getElementById('commentText').value.trim();
 
@@ -184,13 +208,15 @@ function renderizarPaginaProducto(producto) {
             alert("Por favor, selecciona una puntuación y escribe un comentario.");
             return;
         }
+        //Inserta el nuevo comentario al inicio del array (unshift).
         comentariosSimulados.unshift({
             usuario: usuarioLogueado ? usuarioLogueado.username : "Usuario Anónimo",
             calificacion: score,
             texto: comment,
             fecha: new Date().toLocaleDateString('es-CL')
         });
-
+        
+        // Vuelve a renderizar los comentarios y resetea el formulario
         document.getElementById('commentForm').reset();
         renderizarComentarios();
         alert("¡Tu reseña ha sido enviada!");
@@ -200,7 +226,7 @@ function renderizarPaginaProducto(producto) {
 function agregarAlCarrito(producto, cantidad) {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    // Ver si ya existe el producto en el carrito para sumar cantidades
+    // Ver si ya existe el producto en el carrito para sumar cantidades, sino, lo agrega
     const index = carrito.findIndex(item => item.codigo === producto.codigo);
     if (index !== -1) {
         carrito[index].cantidad += cantidad;
